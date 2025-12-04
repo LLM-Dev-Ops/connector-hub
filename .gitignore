@@ -54,3 +54,15 @@ benchmarks/results/*.json
 benchmarks/results/*.csv
 benchmarks/results/*.md
 benchmarks/results/*.log
+
+# Rust build artifacts
+target/
+**/*.rs.bk
+*.pdb
+
+# Claude Flow metrics
+.claude-flow/metrics/
+
+# Research artifacts (optional - can be committed if needed)
+phase-2b-upstream-integration-research.json
+UPSTREAM_INTEGRATION_GUIDE.md
