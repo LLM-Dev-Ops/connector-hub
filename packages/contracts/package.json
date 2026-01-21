@@ -1,0 +1,48 @@
+{
+  "name": "@llm-dev-ops/connector-hub-contracts",
+  "version": "0.1.0",
+  "description": "Agent contract schemas and validation for LLM Connector Hub",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/globalbusinessadvisors/llm-connector-hub",
+    "directory": "packages/contracts"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "llm",
+    "agents",
+    "contracts",
+    "schema",
+    "validation",
+    "zod"
+  ],
+  "license": "MIT OR Apache-2.0",
+  "dependencies": {
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.25",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.0"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  }
+}

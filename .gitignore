@@ -60,8 +60,12 @@ target/
 **/*.rs.bk
 *.pdb
 
-# Claude Flow metrics
-.claude-flow/metrics/
+# Claude Code / Claude Flow
+.claude/
+.claude-flow/
+.mcp.json
+CLAUDE.md
+.swarm/
 
 # Research artifacts (optional - can be committed if needed)
 phase-2b-upstream-integration-research.json

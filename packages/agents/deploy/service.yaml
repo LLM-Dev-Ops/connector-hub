@@ -1,0 +1,98 @@
+# Cloud Run Service Configuration for LLM-Connector-Hub
+#
+# Deploy with:
+# gcloud run services replace deploy/service.yaml --region=us-central1
+#
+# This configuration defines the unified connector service that exposes
+# all agents via a single endpoint.
+
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: llm-connector-hub
+  labels:
+    app: llm-connector-hub
+    platform: agentics
+    tier: connector
+  annotations:
+    run.googleapis.com/description: "LLM Connector Hub - External integration, ingestion, and normalization agents"
+    run.googleapis.com/ingress: all
+    run.googleapis.com/launch-stage: GA
+spec:
+  template:
+    metadata:
+      annotations:
+        # Scaling configuration
+        autoscaling.knative.dev/minScale: "0"
+        autoscaling.knative.dev/maxScale: "10"
+        run.googleapis.com/cpu-throttling: "false"
+        run.googleapis.com/startup-cpu-boost: "true"
+        # Execution environment
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 60
+      serviceAccountName: llm-connector-hub-sa@PROJECT_ID.iam.gserviceaccount.com
+      containers:
+        - name: llm-connector-hub
+          image: gcr.io/PROJECT_ID/llm-connector-hub:latest
+          ports:
+            - containerPort: 8080
+              name: http1
+          resources:
+            limits:
+              cpu: "1"
+              memory: "512Mi"
+          env:
+            - name: SERVICE_NAME
+              value: "llm-connector-hub"
+            - name: SERVICE_VERSION
+              value: "1.0.0"
+            - name: PLATFORM_ENV
+              value: "dev"
+            - name: TELEMETRY_ENABLED
+              value: "true"
+            - name: DEBUG
+              value: "false"
+            - name: AGENT_TIMEOUT_MS
+              value: "30000"
+            - name: MAX_PAYLOAD_BYTES
+              value: "10485760"
+            # Secrets from Secret Manager
+            - name: RUVECTOR_SERVICE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: ruvector-service-url
+                  key: latest
+            - name: RUVECTOR_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: ruvector-api-key
+                  key: latest
+            - name: TELEMETRY_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: telemetry-endpoint
+                  key: latest
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            periodSeconds: 30
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 3
+  traffic:
+    - percent: 100
+      latestRevision: true

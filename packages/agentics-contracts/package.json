@@ -1,0 +1,55 @@
+{
+  "name": "@llm-dev-ops/agentics-contracts",
+  "version": "0.1.0",
+  "description": "Contract definitions, schemas, and types for Agentics platform agents",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/globalbusinessadvisors/llm-connector-hub",
+    "directory": "packages/agentics-contracts"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "rm -rf dist *.tsbuildinfo",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "agentics",
+    "contracts",
+    "schemas",
+    "decision-events",
+    "agents"
+  ],
+  "license": "MIT OR Apache-2.0",
+  "dependencies": {
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.30",
+    "typescript": "5.9.3",
+    "vitest": "^1.0.0"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./events": {
+      "types": "./dist/events/index.d.ts",
+      "default": "./dist/events/index.js"
+    },
+    "./agents/auth": {
+      "types": "./dist/agents/auth/index.d.ts",
+      "default": "./dist/agents/auth/index.js"
+    }
+  }
+}
