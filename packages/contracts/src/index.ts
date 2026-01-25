@@ -138,3 +138,65 @@ export {
   type NormalizedEvent,
   type NormalizationStats,
 } from './agent-contracts/normalizer.js';
+
+// =============================================================================
+// Phase 6 - Core Infrastructure Contracts (Layer 1)
+// =============================================================================
+
+// Core Infrastructure Agent contracts
+export {
+  // Performance budgets
+  PERFORMANCE_BUDGETS,
+  // Decision types
+  CoreInfraDecisionTypeSchema,
+  type CoreInfraDecisionType,
+  // ConfigValidation contracts
+  ConfigSourceSchema,
+  ConfigSeveritySchema,
+  ConfigValidationIssueSchema,
+  ConfigValidationInputSchema,
+  ConfigValidationOutputSchema,
+  ConfigValidationContractSchema,
+  validateConfigValidationInput,
+  validateConfigValidationOutput,
+  safeValidateConfigValidationInput,
+  safeValidateConfigValidationOutput,
+  type ConfigSource,
+  type ConfigSeverity,
+  type ConfigValidationIssue,
+  type ConfigValidationInput,
+  type ConfigValidationOutput,
+  type ConfigValidationContract,
+  // SchemaEnforcement contracts
+  SchemaTypeSchema,
+  SchemaViolationSchema,
+  SchemaEnforcementInputSchema,
+  SchemaEnforcementOutputSchema,
+  SchemaEnforcementContractSchema,
+  validateSchemaEnforcementInput,
+  validateSchemaEnforcementOutput,
+  safeValidateSchemaEnforcementInput,
+  safeValidateSchemaEnforcementOutput,
+  type SchemaType,
+  type SchemaViolation,
+  type SchemaEnforcementInput,
+  type SchemaEnforcementOutput,
+  type SchemaEnforcementContract,
+  // IntegrationHealth contracts
+  IntegrationTypeSchema,
+  HealthStatusSchema,
+  IntegrationHealthCheckSchema,
+  IntegrationHealthInputSchema,
+  IntegrationHealthOutputSchema,
+  IntegrationHealthContractSchema,
+  validateIntegrationHealthInput,
+  validateIntegrationHealthOutput,
+  safeValidateIntegrationHealthInput,
+  safeValidateIntegrationHealthOutput,
+  type IntegrationType,
+  type HealthStatus,
+  type IntegrationHealthCheck,
+  type IntegrationHealthInput,
+  type IntegrationHealthOutput,
+  type IntegrationHealthContract,
+} from './agent-contracts/core-infrastructure.js';

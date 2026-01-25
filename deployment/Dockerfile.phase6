@@ -1,0 +1,124 @@
+# =============================================================================
+# Dockerfile - Phase 6 Core Infrastructure (Layer 1)
+# =============================================================================
+#
+# Multi-stage build for core infrastructure agents:
+# - ConfigValidationAgent
+# - SchemaEnforcementAgent
+# - IntegrationHealthAgent
+#
+# Targets: Google Cloud Run
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Stage 1: Builder
+# -----------------------------------------------------------------------------
+FROM node:20-alpine AS builder
+
+WORKDIR /app
+
+# Install build dependencies
+RUN apk add --no-cache python3 make g++
+
+# Copy package files (includes package-lock.json via glob)
+COPY package*.json ./
+COPY packages/contracts/package*.json ./packages/contracts/
+COPY packages/agentics-contracts/package*.json ./packages/agentics-contracts/
+COPY packages/agents/package*.json ./packages/agents/
+COPY packages/core/package*.json ./packages/core/
+
+# Install dependencies
+RUN npm install --legacy-peer-deps --ignore-scripts --force
+
+# Copy tsconfig files first (needed for build)
+COPY tsconfig.json ./
+COPY tsconfig.build.json ./
+
+# Copy source code
+COPY packages/contracts ./packages/contracts
+COPY packages/agentics-contracts ./packages/agentics-contracts
+COPY packages/agents ./packages/agents
+COPY packages/core ./packages/core
+
+# Build packages in order
+RUN npm run build --workspace=packages/contracts
+RUN npm run build --workspace=packages/agentics-contracts
+RUN npm run build --workspace=packages/core
+RUN npm run build --workspace=packages/agents
+
+# Prune dev dependencies
+RUN npm prune --production
+
+# -----------------------------------------------------------------------------
+# Stage 2: Production
+# -----------------------------------------------------------------------------
+FROM node:20-alpine AS production
+
+# Security: Non-root user
+RUN addgroup -g 1001 -S appgroup && \
+    adduser -u 1001 -S appuser -G appgroup
+
+WORKDIR /app
+
+# Copy production artifacts
+COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appgroup /app/packages/contracts/dist ./packages/contracts/dist
+COPY --from=builder --chown=appuser:appgroup /app/packages/contracts/package.json ./packages/contracts/
+COPY --from=builder --chown=appuser:appgroup /app/packages/core/dist ./packages/core/dist
+COPY --from=builder --chown=appuser:appgroup /app/packages/core/package.json ./packages/core/
+COPY --from=builder --chown=appuser:appgroup /app/packages/agents/dist ./packages/agents/dist
+COPY --from=builder --chown=appuser:appgroup /app/packages/agents/package.json ./packages/agents/
+
+# Set ownership
+RUN chown -R appuser:appgroup /app
+
+# Switch to non-root user
+USER appuser
+
+# Environment variables
+ENV NODE_ENV=production
+ENV PORT=8080
+ENV SERVICE_NAME=core-infrastructure
+
+# Build arg for version
+ARG SERVICE_VERSION=1.0.0
+ENV SERVICE_VERSION=${SERVICE_VERSION}
+
+# Performance budgets
+ENV MAX_TOKENS=800
+ENV MAX_LATENCY_MS=1500
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost:8080/health || exit 1
+
+# Expose port
+EXPOSE 8080
+
+# Start command
+CMD ["node", "packages/agents/dist/agents/core-infrastructure/handler.js"]
+
+# -----------------------------------------------------------------------------
+# Stage 3: Development (optional)
+# -----------------------------------------------------------------------------
+FROM node:20-alpine AS development
+
+WORKDIR /app
+
+# Install dev dependencies
+COPY package*.json ./
+COPY packages/contracts/package*.json ./packages/contracts/
+COPY packages/agents/package*.json ./packages/agents/
+COPY packages/core/package*.json ./packages/core/
+
+RUN npm install --legacy-peer-deps --ignore-scripts --force
+
+# Copy source
+COPY packages ./packages
+COPY tsconfig*.json ./
+
+# Expose ports (app + debugger)
+EXPOSE 8080 9229
+
+# Development command with watch
+CMD ["npm", "run", "dev", "--workspace=packages/agents"]

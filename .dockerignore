@@ -82,9 +82,13 @@ scripts
 .eslintrc*
 .prettierrc*
 .editorconfig
-tsconfig.json
 vitest.config.*
 jest.config.*
+
+# Keep tsconfig files for build
+!tsconfig.json
+!tsconfig.build.json
+!packages/*/tsconfig.json
 
 # Temporary files
 tmp
