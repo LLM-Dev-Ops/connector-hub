@@ -4,7 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
 [![Test Coverage](https://img.shields.io/badge/coverage-96.3%25-brightgreen.svg)](https://github.com/your-org/llm-connector-hub)
 [![Performance](https://img.shields.io/badge/throughput-46K%20ops%2Fs-success.svg)](./PERFORMANCE_RESULTS.md)
-[![License](https://img.shields.io/badge/license-MIT%2FApache--2.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 **Production-ready TypeScript framework for unified LLM provider access with intelligent routing, caching, and resilience.**
 
@@ -792,12 +792,7 @@ Security is a top priority. If you discover a security vulnerability, please ema
 
 ## 📄 License
 
-This project is dual-licensed under:
-
-- [Apache License, Version 2.0](LICENSE-APACHE)
-- [MIT License](LICENSE-MIT)
-
-You may choose either license at your option.
+This project is licensed under the [Apache License, Version 2.0](LICENSE).
 
 ---
 

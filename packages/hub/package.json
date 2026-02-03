@@ -23,7 +23,7 @@
     "hub",
     "orchestrator"
   ],
-  "license": "MIT OR Apache-2.0",
+  "license": "Apache-2.0",
   "dependencies": {
     "@llm-dev-ops/connector-hub-core": "^0.1.0",
     "@llm-dev-ops/connector-hub-middleware": "^0.1.0",

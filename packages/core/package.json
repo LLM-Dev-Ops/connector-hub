@@ -24,7 +24,7 @@
     "interfaces",
     "types"
   ],
-  "license": "MIT OR Apache-2.0",
+  "license": "Apache-2.0",
   "dependencies": {
     "zod": "^3.25.76"
   },
