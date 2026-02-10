@@ -12,3 +12,11 @@ export {
   type EdgeFunctionConfig,
   type CloudFunctionHandler,
 } from './edge-function.js';
+
+// Execution graph instrumentation
+export {
+  ExecutionContext,
+  runAgentInContext,
+  runProcessAgentInContext,
+  type ProcessAgent,
+} from '../execution/index.js';

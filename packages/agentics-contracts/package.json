@@ -50,6 +50,10 @@
     "./agents/auth": {
       "types": "./dist/agents/auth/index.d.ts",
       "default": "./dist/agents/auth/index.js"
+    },
+    "./execution": {
+      "types": "./dist/execution/index.d.ts",
+      "default": "./dist/execution/index.js"
     }
   }
 }

@@ -18,3 +18,6 @@ export * as AuthContracts from './agents/auth';
 
 // Re-export auth contracts for direct imports
 export * from './agents/auth';
+
+// Execution graph types
+export * from './execution';
