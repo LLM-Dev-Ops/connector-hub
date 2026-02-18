@@ -44,6 +44,8 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
+    "@llm-dev-ops/agentics-contracts": "^0.1.0",
+    "@llm-dev-ops/connector-hub-contracts": "^0.1.0",
     "@llm-dev-ops/connector-hub-core": "^0.1.0",
     "commander": "^12.0.0",
     "jose": "5.10.0",

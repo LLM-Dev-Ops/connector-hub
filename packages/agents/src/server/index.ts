@@ -10,6 +10,7 @@
  * - POST /webhook-ingest    - Webhook Listener Agent
  * - POST /event-normalize   - Event Normalization Agent
  * - POST /auth-identity     - Auth/Identity Agent
+ * - POST /api/v1/events     - Automation Core event ingestion
  * - GET  /health            - Health check
  * - GET  /ready             - Readiness check
  *
@@ -297,6 +298,35 @@ async function handleAuthIdentity(req: ExpressLikeRequest, res: ExpressLikeRespo
   }
 }
 
+async function handleEventsIngest(req: ExpressLikeRequest, res: ExpressLikeResponse): Promise<void> {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+
+  const body = req.body as Record<string, unknown> | undefined;
+
+  if (!body || typeof body['event_type'] !== 'string' || typeof body['execution_id'] !== 'string') {
+    res.status(400).json({
+      status: 'error',
+      error: {
+        code: 'INVALID_PAYLOAD',
+        message: 'Missing required fields: event_type, execution_id',
+      },
+    });
+    return;
+  }
+
+  console.log(
+    `[${SERVICE_NAME}] event received: source=${body['source'] ?? 'unknown'} type=${body['event_type']} execution_id=${body['execution_id']} timestamp=${body['timestamp'] ?? getCurrentTimestamp()}`
+  );
+
+  res.status(202).json({
+    status: 'accepted',
+    execution_id: body['execution_id'],
+  });
+}
+
 async function handleNotFound(_req: ExpressLikeRequest, res: ExpressLikeResponse): Promise<void> {
   res.status(404).json({
     error: 'Not found',
@@ -306,6 +336,7 @@ async function handleNotFound(_req: ExpressLikeRequest, res: ExpressLikeResponse
       'POST /webhook-ingest',
       'POST /event-normalize',
       'POST /auth-identity',
+      'POST /api/v1/events',
       'GET /health',
       'GET /ready',
     ],
@@ -360,6 +391,9 @@ async function router(req: IncomingMessage, res: ServerResponse): Promise<void> 
       case '/auth-identity':
         await handleAuthIdentity(expressReq, expressRes);
         break;
+      case '/api/v1/events':
+        await handleEventsIngest(expressReq, expressRes);
+        break;
       default:
         await handleNotFound(expressReq, expressRes);
     }
@@ -391,6 +425,7 @@ server.listen(PORT, () => {
   console.log(`  POST /webhook-ingest    - Webhook Listener Agent`);
   console.log(`  POST /event-normalize   - Event Normalization Agent`);
   console.log(`  POST /auth-identity     - Auth/Identity Agent`);
+  console.log(`  POST /api/v1/events     - Automation Core Events`);
   console.log(`  GET  /health            - Health check`);
   console.log(`  GET  /ready             - Readiness check`);
 });

@@ -19,15 +19,18 @@ import { randomUUID } from 'crypto';
 import { getConfigValidationAgent } from '../config-validation/index.js';
 import { getSchemaEnforcementAgent } from '../schema-enforcement/index.js';
 import { getIntegrationHealthAgent } from '../integration-health/index.js';
-import { PERFORMANCE_BUDGETS } from '@llm-dev-ops/connector-hub-contracts';
-
 // ============================================================================
 // Configuration
 // ============================================================================
 
-const PORT = parseInt(process.env.PORT || '8080', 10);
-const SERVICE_NAME = process.env.SERVICE_NAME || 'core-infrastructure';
-const SERVICE_VERSION = process.env.SERVICE_VERSION || '1.0.0';
+const PERFORMANCE_BUDGETS = {
+  MAX_LATENCY_MS: parseInt(process.env['MAX_LATENCY_MS'] || '1500', 10),
+  MAX_TOKENS: parseInt(process.env['MAX_TOKENS'] || '800', 10),
+} as const;
+
+const PORT = parseInt(process.env['PORT'] || '8080', 10);
+const SERVICE_NAME = process.env['SERVICE_NAME'] || 'core-infrastructure';
+const SERVICE_VERSION = process.env['SERVICE_VERSION'] || '1.0.0';
 
 // ============================================================================
 // Request/Response Types
@@ -303,6 +306,32 @@ async function handleListIntegrations(): Promise<APIResponse> {
   };
 }
 
+/**
+ * POST /api/v1/events - Automation Core event ingestion
+ */
+function handleEventsIngest(request: APIRequest): APIResponse {
+  const body = request.body as Record<string, unknown> | undefined;
+
+  if (!body || typeof body['event_type'] !== 'string' || typeof body['execution_id'] !== 'string') {
+    return errorResponse('Missing required fields: event_type, execution_id', 'INVALID_PAYLOAD', 400);
+  }
+
+  console.log(
+    `[${SERVICE_NAME}] event received: source=${body['source'] ?? 'unknown'} type=${body['event_type']} execution_id=${body['execution_id']} timestamp=${body['timestamp'] ?? new Date().toISOString()}`
+  );
+
+  return {
+    status: 202,
+    body: {
+      status: 'accepted',
+      execution_id: body['execution_id'],
+    },
+    headers: {
+      'X-Trace-Id': request.traceId,
+    },
+  };
+}
+
 // ============================================================================
 // Router
 // ============================================================================
@@ -335,6 +364,9 @@ async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise
       response = await handleListSchemas();
     } else if (path === '/integrations' && method === 'GET') {
       response = await handleListIntegrations();
+    } else if (path === '/api/v1/events' && method === 'POST') {
+      const request = await parseRequest(req);
+      response = handleEventsIngest(request);
     } else {
       response = errorResponse(`Route not found: ${method} ${path}`, 'NOT_FOUND', 404);
     }
@@ -370,6 +402,7 @@ export function startServer(): void {
 ║    GET  /ready                 - Readiness check              ║
 ║    GET  /schemas               - List available schemas       ║
 ║    GET  /integrations          - List integrations            ║
+║    POST /api/v1/events         - Automation Core events       ║
 ╠═══════════════════════════════════════════════════════════════╣
 ║  Performance Budgets:                                         ║
 ║    MAX_TOKENS:     ${String(PERFORMANCE_BUDGETS.MAX_TOKENS).padEnd(37)} ║
