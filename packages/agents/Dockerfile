@@ -17,6 +17,8 @@ COPY tsconfig*.json ./
 COPY packages/agents/package*.json ./packages/agents/
 COPY packages/agents/tsconfig*.json ./packages/agents/
 COPY packages/core/package*.json ./packages/core/
+COPY packages/agentics-contracts/package*.json ./packages/agentics-contracts/
+COPY packages/contracts/package*.json ./packages/contracts/
 
 # Install dependencies (skip scripts to avoid prepublish builds)
 RUN npm install --ignore-scripts --legacy-peer-deps || npm install --ignore-scripts
@@ -24,6 +26,12 @@ RUN npm install --ignore-scripts --legacy-peer-deps || npm install --ignore-scri
 # Copy source
 COPY packages/agents/src ./packages/agents/src
 COPY packages/core/src ./packages/core/src
+COPY packages/agentics-contracts/src ./packages/agentics-contracts/src
+COPY packages/contracts/src ./packages/contracts/src
+
+# Copy tsconfig for referenced projects
+COPY packages/agentics-contracts/tsconfig*.json ./packages/agentics-contracts/
+COPY packages/core/tsconfig*.json ./packages/core/
 
 # Build with lenient config
 WORKDIR /app/packages/agents
@@ -47,7 +55,7 @@ COPY --from=builder --chown=connector-hub:nodejs /app/packages/agents/package.js
 # Environment defaults
 ENV NODE_ENV=production
 ENV PORT=8080
-ENV SERVICE_NAME=llm-connector-hub
+ENV SERVICE_NAME=connector-hub-agents
 ENV SERVICE_VERSION=1.0.0
 
 EXPOSE 8080
