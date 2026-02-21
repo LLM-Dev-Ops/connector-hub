@@ -1,0 +1,42 @@
+# .gcloudignore — connector-hub-agents Cloud Function
+# Files excluded from gcloud functions deploy upload
+
+# Source (dist is deployed, not src)
+src/
+
+# Tests
+**/*.test.ts
+**/*.spec.ts
+**/__tests__/
+
+# Dev config
+tsconfig.json
+tsconfig.build.json
+vitest.config.ts
+.eslintrc*
+.prettierrc*
+
+# Build artifacts not needed at runtime
+*.tsbuildinfo
+
+# Docs and deploy scripts
+docs/
+deploy/
+README.md
+CHANGELOG.md
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# Docker (not needed in Cloud Functions)
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# Node dev
+node_modules/.cache/

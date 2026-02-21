@@ -162,3 +162,9 @@ export {
   createLLMNormalizer,
   createWebhookNormalizer,
 } from './event-normalization/normalizers/index.js';
+
+// ============================================================================
+// Cloud Function Entry Point
+// ============================================================================
+
+export { handler } from './functions/index.js';
