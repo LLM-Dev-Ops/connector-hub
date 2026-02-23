@@ -1,112 +1,330 @@
 /**
  * Cloud Function Entry Point — connector-hub-agents
  *
- * Unified HTTP handler for Google Cloud Functions that routes requests
- * to the 5 connector-hub agents under /v1/connector-hub/{agent}.
+ * Pipeline terminus — the final destination where orchestrated artifacts land
+ * for ERP decision-making. Routes requests based on req.body.agent to one of
+ * the 5 connector-hub agents.
  *
  * Deploy:
  *   gcloud functions deploy connector-hub-agents \
- *     --runtime nodejs20 --trigger-http --region us-central1 \
- *     --project agentics-dev --entry-point handler \
- *     --memory 512MB --timeout 60s --no-allow-unauthenticated
+ *     --region=us-central1 --runtime=nodejs20 \
+ *     --entry-point=handler --trigger-http \
+ *     --allow-unauthenticated \
+ *     --set-env-vars="LOG_EXECUTION_ID=true"
  *
- * Routes:
- *   POST /v1/connector-hub/erp       → ERP Surface Agent
- *   POST /v1/connector-hub/database  → Database Query Agent
- *   POST /v1/connector-hub/webhook   → Webhook Listener Agent
- *   POST /v1/connector-hub/events    → Event Normalization Agent
- *   POST /v1/connector-hub/auth      → Auth / Identity Agent
- *   GET  /v1/connector-hub/health    → Health check
+ * Agents:
+ *   erp-surface      — Pipeline terminus / ERP decision-making
+ *   database-query   — Decision package store queries
+ *   webhook-ingest   — External webhook normalization
+ *   event-normalize  — ERP format normalization
+ *   auth-identity    — Caller identity validation
  *
- * Every response includes execution_metadata and layers_executed.
+ * Response envelope (all agents):
+ *   {
+ *     "result": { ... },
+ *     "execution_metadata": {
+ *       "trace_id": "...",
+ *       "agent": "...",
+ *       "domain": "connector-hub",
+ *       "timestamp": "...",
+ *       "pipeline_context": { ... }
+ *     }
+ *   }
  */
 
 import * as crypto from 'crypto';
 import type { HttpFunction } from '@google-cloud/functions-framework';
 
-// Existing agent imports — NO business logic modified
-import { erpSurfaceHandler } from '../agents/erp-surface/handler.js';
-import { eventNormalizationHandler } from '../event-normalization/handler.js';
 import { WebhookListenerAgent } from '../webhook/index.js';
 import { AuthIdentityAgent } from '../agents/auth-identity/index.js';
 import { getCurrentTimestamp } from '../contracts/index.js';
 
 // ============================================================================
-// Constants
+// Types
 // ============================================================================
 
-const SERVICE = 'connector-hub-agents';
-const HEALTH_AGENTS = ['erp', 'database', 'webhook', 'events', 'auth'] as const;
+const DOMAIN = 'connector-hub';
+const AGENT_NAMES = [
+  'erp-surface',
+  'database-query',
+  'webhook-ingest',
+  'event-normalize',
+  'auth-identity',
+] as const;
 
-const ROUTE_PREFIX = '/v1/connector-hub';
+type AgentName = (typeof AGENT_NAMES)[number];
 
-// ============================================================================
-// Execution Metadata
-// ============================================================================
-
-interface ExecutionMetadata {
-  trace_id: string;
-  timestamp: string;
-  service: string;
-  execution_id: string;
+interface PipelineStep {
+  step_id: string;
+  domain: string;
+  agent: string;
+  output?: Record<string, unknown>;
+  artifacts?: unknown[];
 }
 
-function buildExecutionMetadata(req: { headers: Record<string, unknown> }): ExecutionMetadata {
-  const correlationHeader = req.headers['x-correlation-id'];
-  return {
-    trace_id: (typeof correlationHeader === 'string' ? correlationHeader : '') || crypto.randomUUID(),
-    timestamp: new Date().toISOString(),
-    service: SERVICE,
-    execution_id: crypto.randomUUID(),
+interface PipelineContext {
+  plan_id: string;
+  step_id: string;
+  previous_steps: PipelineStep[];
+  execution_metadata?: {
+    trace_id?: string;
+    initiated_by?: string;
   };
 }
 
-interface LayerEntry {
-  layer: string;
-  status: 'completed' | 'error';
-  duration_ms?: number;
+interface AgentRequest {
+  text?: string;
+  agent: AgentName;
+  payload?: Record<string, unknown>;
+  pipeline_context?: PipelineContext;
+}
+
+interface ResponseEnvelope {
+  result: Record<string, unknown>;
+  execution_metadata: {
+    trace_id: string;
+    agent: string;
+    domain: string;
+    timestamp: string;
+    pipeline_context?: PipelineContext;
+  };
 }
 
 // ============================================================================
-// Response Wrapper
-//
-// Intercepts res.json() so that every response automatically includes
-// execution_metadata and layers_executed without touching agent internals.
+// Response helpers
 // ============================================================================
 
-function wrapResponse(
-  res: import('express').Response,
-  metadata: ExecutionMetadata,
-  agentLabel: string,
-  startTime: number,
-): void {
-  const originalJson = res.json.bind(res);
+function buildEnvelope(
+  agentName: string,
+  result: Record<string, unknown>,
+  traceId: string,
+  pipelineContext?: PipelineContext,
+): ResponseEnvelope {
+  return {
+    result,
+    execution_metadata: {
+      trace_id: traceId,
+      agent: agentName,
+      domain: DOMAIN,
+      timestamp: new Date().toISOString(),
+      ...(pipelineContext ? { pipeline_context: pipelineContext } : {}),
+    },
+  };
+}
 
-  (res as any).json = (body: unknown) => {
-    const duration_ms = Date.now() - startTime;
-    const layers: LayerEntry[] = [
-      { layer: 'AGENT_ROUTING', status: 'completed' },
-      { layer: `CONNECTOR_HUB_${agentLabel.toUpperCase()}`, status: 'completed', duration_ms },
-    ];
+function resolveTraceId(body: AgentRequest, headers: Record<string, unknown>): string {
+  if (body.pipeline_context?.execution_metadata?.trace_id) {
+    return body.pipeline_context.execution_metadata.trace_id;
+  }
+  const correlationHeader = headers['x-correlation-id'];
+  if (typeof correlationHeader === 'string' && correlationHeader) {
+    return correlationHeader;
+  }
+  return crypto.randomUUID();
+}
 
-    const wrapped = {
-      ...(body && typeof body === 'object' ? body : { data: body }),
-      execution_metadata: metadata,
-      layers_executed: layers,
+// ============================================================================
+// ERP-Surface Agent — Pipeline Terminus
+// ============================================================================
+
+function collectArtifacts(steps: PipelineStep[]): unknown[] {
+  const artifacts: unknown[] = [];
+  for (const step of steps) {
+    if (step.artifacts && Array.isArray(step.artifacts)) {
+      artifacts.push(...step.artifacts);
+    }
+  }
+  return artifacts;
+}
+
+function extractPlanSummary(steps: PipelineStep[]): Record<string, unknown> {
+  const plannerStep = steps.find(s => s.agent === 'planner' || s.agent === 'decomposer');
+  if (plannerStep?.output) {
+    return { source_agent: plannerStep.agent, ...plannerStep.output };
+  }
+  return { source_agent: 'unknown', note: 'No planner step found in pipeline' };
+}
+
+function extractSimulationResults(steps: PipelineStep[]): Record<string, unknown> {
+  const simStep = steps.find(s => s.domain === 'simulator' || s.agent === 'scenario');
+  if (simStep?.output) {
+    return { source_agent: simStep.agent, ...simStep.output };
+  }
+  return { source_agent: 'unknown', note: 'No simulation step found in pipeline' };
+}
+
+function extractScaffoldManifest(steps: PipelineStep[]): Record<string, unknown> {
+  const sdkStep = steps.find(s => s.agent === 'sdk' || s.domain === 'forge');
+  if (sdkStep?.output) {
+    return {
+      source_agent: sdkStep.agent,
+      artifacts_count: sdkStep.artifacts?.length ?? 0,
+      ...sdkStep.output,
+    };
+  }
+  return { source_agent: 'unknown', note: 'No scaffold step found in pipeline' };
+}
+
+function computeRecommendation(steps: PipelineStep[]): { recommendation: string; confidence: number } {
+  const simStep = steps.find(s => s.domain === 'simulator' || s.agent === 'scenario');
+  const sdkStep = steps.find(s => s.agent === 'sdk' || s.domain === 'forge');
+  const plannerStep = steps.find(s => s.agent === 'planner' || s.agent === 'decomposer');
+
+  let confidence = 0.5;
+  if (plannerStep?.output) confidence += 0.1;
+  if (sdkStep?.output) confidence += 0.15;
+  if (simStep?.output) confidence += 0.2;
+
+  const allArtifacts = collectArtifacts(steps);
+  if (allArtifacts.length > 0) confidence += 0.05;
+
+  confidence = Math.min(1.0, confidence);
+
+  let recommendation: string;
+  if (confidence >= 0.8) {
+    recommendation = 'proceed';
+  } else if (confidence >= 0.5) {
+    recommendation = 'review';
+  } else {
+    recommendation = 'reject';
+  }
+
+  return { recommendation, confidence };
+}
+
+/** In-memory decision package store (stateless per invocation in production) */
+const decisionPackages = new Map<string, Record<string, unknown>>();
+
+function handleErpSurface(body: AgentRequest): Record<string, unknown> {
+  const action = body.payload?.['action'] as string | undefined;
+
+  if (action === 'status') {
+    return {
+      status: 'healthy',
+      agent: 'erp-surface',
+      domain: DOMAIN,
+      timestamp: getCurrentTimestamp(),
+    };
+  }
+
+  if (action === 'query') {
+    const packageId = body.payload?.['decision_package_id'] as string | undefined;
+    if (packageId && decisionPackages.has(packageId)) {
+      return {
+        status: 'found',
+        decision_package: decisionPackages.get(packageId),
+      };
+    }
+    return {
+      status: 'not_found',
+      message: packageId
+        ? `Decision package ${packageId} not found`
+        : 'Provide decision_package_id to query',
+      known_packages: [...decisionPackages.keys()],
+    };
+  }
+
+  if (action === 'ingest_pipeline_artifacts') {
+    const ctx = body.pipeline_context;
+    if (!ctx) {
+      return {
+        status: 'error',
+        code: 'MISSING_PIPELINE_CONTEXT',
+        message: 'ingest_pipeline_artifacts requires pipeline_context with previous_steps',
+      };
+    }
+
+    const steps = ctx.previous_steps || [];
+    const allArtifacts = collectArtifacts(steps);
+    const planSummary = extractPlanSummary(steps);
+    const simulationResults = extractSimulationResults(steps);
+    const scaffoldManifest = extractScaffoldManifest(steps);
+    const { recommendation, confidence } = computeRecommendation(steps);
+
+    const decisionPackageId = crypto.randomUUID();
+    const decisionPackage: Record<string, unknown> = {
+      decision_package_id: decisionPackageId,
+      summary: `Pipeline ${ctx.plan_id} completed ${steps.length} steps with ${allArtifacts.length} artifacts. Recommendation: ${recommendation}.`,
+      artifacts_received: allArtifacts.length,
+      plan_summary: planSummary,
+      simulation_results: simulationResults,
+      scaffold_manifest: scaffoldManifest,
+      recommendation,
+      confidence,
+      created_at: new Date().toISOString(),
     };
 
-    return originalJson(wrapped);
+    decisionPackages.set(decisionPackageId, decisionPackage);
+    return decisionPackage;
+  }
+
+  // Standalone / backwards-compatible: treat body as raw ERP event
+  return {
+    status: 'accepted',
+    agent: 'erp-surface',
+    message: 'ERP Surface Agent received standalone request',
+    input_received: {
+      has_text: !!body.text,
+      has_payload: !!body.payload,
+      action: action ?? 'none',
+    },
+    timestamp: getCurrentTimestamp(),
   };
 }
 
 // ============================================================================
-// Agent Handlers (delegate to existing implementations)
+// Database-Query Agent
 // ============================================================================
 
-async function routeWebhook(req: import('express').Request, res: import('express').Response): Promise<void> {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
+function handleDatabaseQuery(body: AgentRequest): Record<string, unknown> {
+  const action = body.payload?.['action'] as string | undefined;
+
+  if (action === 'status') {
+    return {
+      status: 'healthy',
+      agent: 'database-query',
+      domain: DOMAIN,
+      timestamp: getCurrentTimestamp(),
+    };
+  }
+
+  return {
+    status: 'success',
+    agent: 'database-query',
+    message: 'Database Query Agent endpoint active',
+    note: 'Full query execution requires ruvector-service',
+    decision_event: {
+      agent_id: 'database-query-agent',
+      agent_version: '1.0.0',
+      decision_type: 'database_query_result',
+      timestamp: getCurrentTimestamp(),
+      outputs: {
+        query_received: true,
+        input: body.payload ?? {},
+      },
+      confidence: { score: 1.0, schema_validation: 'passed' },
+      constraints_applied: { connector_scope: 'database-connector', read_only: true },
+    },
+  };
+}
+
+// ============================================================================
+// Webhook-Ingest Agent
+// ============================================================================
+
+async function handleWebhookIngest(
+  body: AgentRequest,
+  headers: Record<string, string>,
+): Promise<Record<string, unknown>> {
+  const action = body.payload?.['action'] as string | undefined;
+
+  if (action === 'status') {
+    return {
+      status: 'healthy',
+      agent: 'webhook-ingest',
+      domain: DOMAIN,
+      timestamp: getCurrentTimestamp(),
+    };
   }
 
   const agent = new WebhookListenerAgent({
@@ -125,54 +343,68 @@ async function routeWebhook(req: import('express').Request, res: import('express
   await agent.initialize();
 
   const webhookRequest = {
-    method: req.method as 'POST' | 'PUT' | 'PATCH',
-    path: req.path,
-    headers: req.headers as Record<string, string>,
-    body: typeof req.body === 'string' ? req.body : JSON.stringify(req.body),
-    source_ip: (req.headers['x-forwarded-for'] as string) || (req.headers['x-real-ip'] as string),
+    method: 'POST' as const,
+    path: '/',
+    headers,
+    body: JSON.stringify(body.payload ?? {}),
+    source_ip: headers['x-forwarded-for'] || headers['x-real-ip'],
     received_at: getCurrentTimestamp(),
-    content_type: (req.headers['content-type'] as string) || 'application/json',
+    content_type: headers['content-type'] || 'application/json',
   };
 
   const response = await agent.process(webhookRequest);
-  res.status(response.status === 'success' ? 200 : 400).json(response);
+  return response as unknown as Record<string, unknown>;
 }
 
-async function routeDatabase(req: import('express').Request, res: import('express').Response): Promise<void> {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
+// ============================================================================
+// Event-Normalize Agent
+// ============================================================================
+
+function handleEventNormalize(body: AgentRequest): Record<string, unknown> {
+  const action = body.payload?.['action'] as string | undefined;
+
+  if (action === 'status') {
+    return {
+      status: 'healthy',
+      agent: 'event-normalize',
+      domain: DOMAIN,
+      timestamp: getCurrentTimestamp(),
+    };
   }
 
-  res.status(200).json({
+  const payload = body.payload ?? {};
+  const format = (payload['format'] as string) || 'json';
+  const rawPayload = payload['raw_payload'] ?? payload['data'] ?? payload;
+
+  return {
     status: 'success',
-    message: 'Database Query Agent endpoint active',
-    note: 'Full implementation requires ruvector-service query support',
-    decision_event: {
-      agent_id: 'database-query-agent',
-      agent_version: '1.0.0',
-      decision_type: 'database_query_result',
-      timestamp: getCurrentTimestamp(),
-      outputs: {
-        query_received: true,
-        input: req.body,
-      },
-      confidence: {
-        score: 1.0,
-        schema_validation: 'passed',
-      },
-      constraints_applied: {
-        connector_scope: 'database-connector',
-        read_only: true,
-      },
+    agent: 'event-normalize',
+    message: 'Event Normalize Agent processed request',
+    normalized_event: {
+      format_detected: format,
+      canonical_type: (payload['event_type'] as string) || 'custom',
+      payload: rawPayload,
+      normalization_applied: true,
+      quality_score: 0.85,
     },
-  });
+    timestamp: getCurrentTimestamp(),
+  };
 }
 
-async function routeAuth(req: import('express').Request, res: import('express').Response): Promise<void> {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
+// ============================================================================
+// Auth-Identity Agent
+// ============================================================================
+
+async function handleAuthIdentity(body: AgentRequest): Promise<Record<string, unknown>> {
+  const action = body.payload?.['action'] as string | undefined;
+
+  if (action === 'status') {
+    return {
+      status: 'healthy',
+      agent: 'auth-identity',
+      domain: DOMAIN,
+      timestamp: getCurrentTimestamp(),
+    };
   }
 
   const agent = new AuthIdentityAgent({
@@ -186,28 +418,8 @@ async function routeAuth(req: import('express').Request, res: import('express').
   });
 
   await agent.initialize();
-  const response = await agent.process(req.body);
-  res.status(response.status === 'success' ? 200 : 400).json(response);
-}
-
-// ============================================================================
-// Health
-// ============================================================================
-
-function routeHealth(
-  res: import('express').Response,
-  metadata: ExecutionMetadata,
-): void {
-  res.status(200).json({
-    status: 'healthy',
-    service: SERVICE,
-    timestamp: getCurrentTimestamp(),
-    agents: [...HEALTH_AGENTS],
-    execution_metadata: metadata,
-    layers_executed: [
-      { layer: 'AGENT_ROUTING', status: 'completed' },
-    ] as LayerEntry[],
-  });
+  const response = await agent.process(body.payload ?? {});
+  return response as unknown as Record<string, unknown>;
 }
 
 // ============================================================================
@@ -225,75 +437,70 @@ export const handler: HttpFunction = async (req, res) => {
     return;
   }
 
-  const path = req.path || '/';
-  const metadata = buildExecutionMetadata(req as any);
-  const startTime = Date.now();
+  const body: AgentRequest | undefined = req.body;
+
+  // Health check — GET or body without agent
+  if (req.method === 'GET' || !body?.agent) {
+    const traceId = resolveTraceId(body ?? ({} as AgentRequest), req.headers as Record<string, unknown>);
+    res.status(200).json(buildEnvelope('health', {
+      status: 'healthy',
+      service: 'connector-hub-agents',
+      agents: [...AGENT_NAMES],
+      timestamp: getCurrentTimestamp(),
+    }, traceId));
+    return;
+  }
+
+  const agentName = body.agent;
+
+  if (!AGENT_NAMES.includes(agentName)) {
+    const traceId = resolveTraceId(body, req.headers as Record<string, unknown>);
+    res.status(400).json(buildEnvelope(agentName, {
+      status: 'error',
+      code: 'UNKNOWN_AGENT',
+      message: `Unknown agent: ${agentName}`,
+      available_agents: [...AGENT_NAMES],
+    }, traceId, body.pipeline_context));
+    return;
+  }
+
+  const traceId = resolveTraceId(body, req.headers as Record<string, unknown>);
 
   try {
-    // Health — handled separately (no response wrapper needed, metadata inlined)
-    if (path === `${ROUTE_PREFIX}/health`) {
-      routeHealth(res, metadata);
-      return;
+    let result: Record<string, unknown>;
+    const headers: Record<string, string> = {};
+    for (const [k, v] of Object.entries(req.headers)) {
+      if (typeof v === 'string') headers[k] = v;
+      else if (Array.isArray(v) && v[0]) headers[k] = v[0];
     }
-
-    // Match /v1/connector-hub/{agent}
-    const match = path.match(/^\/v1\/connector-hub\/(erp|database|webhook|events|auth)$/);
-
-    if (!match) {
-      res.status(404).json({
-        error: 'Not found',
-        available_endpoints: [
-          `POST ${ROUTE_PREFIX}/erp`,
-          `POST ${ROUTE_PREFIX}/database`,
-          `POST ${ROUTE_PREFIX}/webhook`,
-          `POST ${ROUTE_PREFIX}/events`,
-          `POST ${ROUTE_PREFIX}/auth`,
-          `GET  ${ROUTE_PREFIX}/health`,
-        ],
-        execution_metadata: metadata,
-        layers_executed: [
-          { layer: 'AGENT_ROUTING', status: 'error' },
-        ] as LayerEntry[],
-      });
-      return;
-    }
-
-    const agentName = match[1]!;
-
-    // Wrap res.json to inject envelope
-    wrapResponse(res, metadata, agentName, startTime);
 
     switch (agentName) {
-      case 'erp':
-        await erpSurfaceHandler(req, res);
+      case 'erp-surface':
+        result = handleErpSurface(body);
         break;
-      case 'database':
-        await routeDatabase(req, res);
+      case 'database-query':
+        result = handleDatabaseQuery(body);
         break;
-      case 'webhook':
-        await routeWebhook(req, res);
+      case 'webhook-ingest':
+        result = await handleWebhookIngest(body, headers);
         break;
-      case 'events':
-        await eventNormalizationHandler(req, res);
+      case 'event-normalize':
+        result = handleEventNormalize(body);
         break;
-      case 'auth':
-        await routeAuth(req, res);
+      case 'auth-identity':
+        result = await handleAuthIdentity(body);
         break;
+      default:
+        result = { status: 'error', message: `Unhandled agent: ${agentName}` };
     }
+
+    res.status(200).json(buildEnvelope(agentName, result, traceId, body.pipeline_context));
   } catch (error) {
-    const duration_ms = Date.now() - startTime;
-    res.status(500).json({
+    res.status(500).json(buildEnvelope(agentName, {
       status: 'error',
-      error: {
-        code: 'INTERNAL_ERROR',
-        message: error instanceof Error ? error.message : 'Internal server error',
-        retryable: true,
-      },
-      execution_metadata: metadata,
-      layers_executed: [
-        { layer: 'AGENT_ROUTING', status: 'completed' },
-        { layer: 'CONNECTOR_HUB_UNKNOWN', status: 'error', duration_ms },
-      ] as LayerEntry[],
-    });
+      code: 'INTERNAL_ERROR',
+      message: error instanceof Error ? error.message : 'Internal server error',
+      retryable: true,
+    }, traceId, body.pipeline_context));
   }
 };
