@@ -81,7 +81,7 @@ export const WriteDecisionEventOptionsSchema = z.object({
   requestId: z.string().optional(),
 });
 
-export type WriteDecisionEventOptions = z.infer<typeof WriteDecisionEventOptionsSchema>;
+// Type inferred from schema matches interface above
 
 /**
  * Batch write options
@@ -411,7 +411,7 @@ export const DatabaseQueryResultSchema = z.object({
   connection_id: z.string().optional(),
 });
 
-export type DatabaseQueryResult = z.infer<typeof DatabaseQueryResultSchema>;
+// Type inferred from schema matches interface above
 
 /**
  * Options for writing a query result
@@ -910,46 +910,4 @@ export interface RuVectorLogEntry {
  */
 export type ObservabilityCallback = (entry: RuVectorLogEntry) => void;
 
-// ============================================================================
-// Export all types for convenience
-// ============================================================================
-
-export type {
-  DecisionEvent,
-  DataClassification,
-  RedactionLevel,
-  WriteDecisionEventOptions,
-  BatchWriteDecisionEventsOptions,
-  WriteDecisionEventResponse,
-  WriteDecisionEventError,
-  BatchWriteDecisionEventsResponse,
-  BatchEventResult,
-  ArtifactType,
-  IngressArtifact,
-  WriteIngressArtifactOptions,
-  WriteIngressArtifactResponse,
-  DatabaseType,
-  QueryResultType,
-  ColumnMetadata,
-  DatabaseQueryResult,
-  WriteQueryResultOptions,
-  WriteQueryResultResponse,
-  RuVectorAuth,
-  RuVectorMTLSAuth,
-  RuVectorBearerTokenAuth,
-  CircuitBreakerConfig,
-  RetryConfig,
-  LocalQueueConfig,
-  RuVectorClientConfig,
-  CircuitBreakerState,
-  HealthStatus,
-  RuVectorHealth,
-  RuVectorMetrics,
-  PIIDetectionResult,
-  BatchConfig,
-  BatchedWriteResult,
-  RuVectorLogEntry,
-  IRuVectorClient,
-  ISecretsValidator,
-  ObservabilityCallback,
-};
+// All types are exported inline above

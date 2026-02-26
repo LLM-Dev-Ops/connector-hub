@@ -268,7 +268,7 @@ export class DatabaseQueryAgent extends EdgeFunctionAgentBase<
     }
 
     return {
-      rows: result.data || [],
+      rows: (result.data || []) as Record<string, unknown>[],
       rowCount: result.metadata?.rowCount || 0,
       columns: [], // Would be populated by ruvector-service
       queryPlan: undefined

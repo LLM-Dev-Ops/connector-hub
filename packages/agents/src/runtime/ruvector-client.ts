@@ -83,7 +83,7 @@ export class RuVectorError extends Error {
  * NO SQL execution - all operations delegated to ruvector-service.
  */
 export class RuVectorClient {
-  private readonly config: Required<RuVectorClientConfig>;
+  private readonly config: RuVectorClientConfig & { timeout: number; maxRetries: number };
 
   constructor(config: RuVectorClientConfig) {
     this.config = {
