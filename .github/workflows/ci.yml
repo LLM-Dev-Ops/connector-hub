@@ -156,6 +156,64 @@ jobs:
           path: coverage/
           retention-days: 30
 
+  cargo-pins:
+    name: Cargo Pin Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check git dependencies are pinned to immutable refs (ADR-004)
+        run: bash scripts/lint-cargo-pins.sh
+
+  rust:
+    name: Rust Build
+    runs-on: ubuntu-latest
+    needs: cargo-pins
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Show Rust toolchain
+        run: |
+          rustc --version
+          cargo --version
+
+      - name: Cache cargo
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
+
+      # --locked fails if Cargo.lock would need to change, which is what turns
+      # the ADR-004 pinning policy into an enforced invariant.
+      - name: Build workspace
+        run: cargo build --locked --workspace
+
+      - name: Test workspace
+        run: cargo test --locked --workspace
+
+      - name: Fail on duplicate ecosystem crates
+        run: |
+          set -euo pipefail
+          cargo tree --locked --workspace --duplicates > cargo-duplicates.txt
+          if DUPES=$(grep -E '^(llm-|schema-registry-|connector-hub-)' cargo-duplicates.txt); then
+            echo "Duplicate ecosystem crate(s) in the dependency graph (ADR-004):"
+            echo "${DUPES}"
+            echo ""
+            echo "Two copies of the same crate from different git refs are distinct"
+            echo "types to the compiler. Align the pins in Cargo.toml rather than"
+            echo "reaching for [patch]. See"
+            echo "docs/architecture/decisions/ADR-004-pinning-upstream-git-dependencies.md"
+            exit 1
+          fi
+          echo "No duplicate ecosystem crates."
+
   build:
     name: Build
     runs-on: ubuntu-latest
@@ -221,7 +279,7 @@ jobs:
   verify:
     name: Verify CI
     runs-on: ubuntu-latest
-    needs: [build, build-matrix]
+    needs: [build, build-matrix, rust]
     steps:
       - name: CI Success
         run: echo "All CI checks passed successfully!"

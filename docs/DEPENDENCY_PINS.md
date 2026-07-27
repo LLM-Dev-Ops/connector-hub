@@ -47,19 +47,7 @@ Pins advance through review, not because someone ran `cargo update`.
 
 ## Enforcement
 
-**Not yet enforced in CI.** `.github/workflows/ci.yml` still contains no cargo
-invocation, so nothing currently stops a floating branch ref or a reintroduced
-duplicate from landing. Until the workflow jobs described below exist, run the
-checks by hand before merging anything that touches `Cargo.toml`:
-
-```bash
-bash scripts/lint-cargo-pins.sh
-cargo build --locked --workspace
-cargo test --locked --workspace
-cargo tree --locked --workspace --duplicates | grep -E '^(llm-|schema-registry-)'
-```
-
-The intended CI gate is two jobs:
+Two jobs in `.github/workflows/ci.yml` gate every pull request:
 
 - `cargo-pins` runs `scripts/lint-cargo-pins.sh`, rejecting a floating branch
   ref in any tracked `Cargo.toml`, any `git = ` without a `tag`/`rev`, and any
@@ -70,6 +58,16 @@ The intended CI gate is two jobs:
   fails the build if `Cargo.lock` would need to change, which is what makes the
   pins an enforced invariant rather than a convention.
 
+`verify` depends on `rust`, so the Rust gate is required rather than advisory.
 This is ADR-004 verification check 9 — "the one that has been missing all
-along." Without it every other check here is a one-time snapshot rather than an
-invariant.
+along." Without it every other check here would be a one-time snapshot rather
+than an invariant.
+
+Run the same checks locally before opening a dependency-update PR:
+
+```bash
+bash scripts/lint-cargo-pins.sh
+cargo build --locked --workspace
+cargo test --locked --workspace
+cargo tree --locked --workspace --duplicates | grep -E '^(llm-|schema-registry-)'
+```
