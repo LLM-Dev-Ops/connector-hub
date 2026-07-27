@@ -426,7 +426,7 @@ dependencies = [
  "anyhow",
  "async-trait",
  "chrono",
- "llm-config-core 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?branch=main)",
+ "llm-config-core",
  "llm-observatory-core",
  "schema-registry-core",
  "serde",
@@ -1147,32 +1147,11 @@ source = "git+https://github.com/LLM-Dev-Ops/config-manager?tag=v0.5.1#acc734dd1
 dependencies = [
  "anyhow",
  "chrono",
- "llm-config-crypto 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?tag=v0.5.1)",
- "llm-config-storage 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?tag=v0.5.1)",
+ "llm-config-crypto",
+ "llm-config-storage",
  "serde",
  "serde_json",
  "serde_yaml",
- "thiserror",
- "tokio",
- "toml",
- "tracing",
- "uuid",
-]
-
-[[package]]
-name = "llm-config-core"
-version = "0.5.0"
-source = "git+https://github.com/LLM-Dev-Ops/config-manager?branch=main#4014f4eaa2d96ab966b9b9c4834533fe1afb3c05"
-dependencies = [
- "anyhow",
- "async-trait",
- "chrono",
- "llm-config-crypto 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?branch=main)",
- "llm-config-storage 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?branch=main)",
- "serde",
- "serde_json",
- "serde_yaml",
- "tempfile",
  "thiserror",
  "tokio",
  "toml",
@@ -1201,51 +1180,13 @@ dependencies = [
 ]
 
 [[package]]
-name = "llm-config-crypto"
-version = "0.5.0"
-source = "git+https://github.com/LLM-Dev-Ops/config-manager?branch=main#4014f4eaa2d96ab966b9b9c4834533fe1afb3c05"
-dependencies = [
- "anyhow",
- "argon2",
- "base64 0.21.7",
- "chacha20poly1305",
- "getrandom 0.2.16",
- "hex",
- "rand",
- "ring",
- "serde",
- "serde_json",
- "thiserror",
- "zeroize",
-]
-
-[[package]]
 name = "llm-config-storage"
 version = "0.5.0"
 source = "git+https://github.com/LLM-Dev-Ops/config-manager?tag=v0.5.1#acc734dd11ee8911ec62aee59b32ff4fbf6e7655"
 dependencies = [
  "anyhow",
  "chrono",
- "llm-config-crypto 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?tag=v0.5.1)",
- "serde",
- "serde_json",
- "serde_yaml",
- "sled",
- "thiserror",
- "tokio",
- "toml",
- "tracing",
- "uuid",
-]
-
-[[package]]
-name = "llm-config-storage"
-version = "0.5.0"
-source = "git+https://github.com/LLM-Dev-Ops/config-manager?branch=main#4014f4eaa2d96ab966b9b9c4834533fe1afb3c05"
-dependencies = [
- "anyhow",
- "chrono",
- "llm-config-crypto 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?branch=main)",
+ "llm-config-crypto",
  "serde",
  "serde_json",
  "serde_yaml",
@@ -1260,7 +1201,7 @@ dependencies = [
 [[package]]
 name = "llm-observatory-core"
 version = "0.1.1"
-source = "git+https://github.com/LLM-Dev-Ops/observatory?branch=main#6813701693cc85094ea6c52cb00ad4911446b096"
+source = "git+https://github.com/LLM-Dev-Ops/observatory?rev=6813701693cc85094ea6c52cb00ad4911446b096#6813701693cc85094ea6c52cb00ad4911446b096"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1826,7 +1767,7 @@ dependencies = [
 [[package]]
 name = "schema-registry-core"
 version = "0.1.0"
-source = "git+https://github.com/LLM-Dev-Ops/schema-registry?branch=main#65d7501bcd6649f63e945e8f9d987e11ea58963f"
+source = "git+https://github.com/LLM-Dev-Ops/schema-registry?rev=65d7501bcd6649f63e945e8f9d987e11ea58963f#65d7501bcd6649f63e945e8f9d987e11ea58963f"
 dependencies = [
  "anyhow",
  "apache-avro",
@@ -1836,7 +1777,7 @@ dependencies = [
  "futures",
  "hex",
  "jsonschema",
- "llm-config-core 0.5.0 (git+https://github.com/LLM-Dev-Ops/config-manager?tag=v0.5.1)",
+ "llm-config-core",
  "parking_lot 0.12.5",
  "prost",
  "prost-types",
