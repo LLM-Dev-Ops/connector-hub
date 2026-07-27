@@ -24,10 +24,17 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 chrono = { version = "0.4", features = ["serde"] }
 
-# Upstream compile-time dependencies (git dependencies)
-schema-registry-core = { git = "https://github.com/LLM-Dev-Ops/schema-registry", branch = "main" }
-llm-config-core = { git = "https://github.com/LLM-Dev-Ops/config-manager", branch = "main" }
-llm-observatory-core = { git = "https://github.com/LLM-Dev-Ops/observatory", branch = "main" }
+# Upstream compile-time dependencies — pinned to immutable refs. See
+# docs/architecture/decisions/ADR-004-pinning-upstream-git-dependencies.md.
+# Floating branch refs are banned; scripts/lint-cargo-pins.sh enforces this.
+# Bump only via a dedicated dependency-update PR that touches Cargo.toml and
+# Cargo.lock and nothing else.
+# schema-registry and observatory have cut no tags yet; `rev` is the interim form.
+# llm-config-core is held at v0.5.1 to match what schema-registry-core requires —
+# changing it re-splits the diamond and requires schema-registry to move first.
+schema-registry-core = { git = "https://github.com/LLM-Dev-Ops/schema-registry", rev = "65d7501bcd6649f63e945e8f9d987e11ea58963f" }
+llm-config-core = { git = "https://github.com/LLM-Dev-Ops/config-manager", tag = "v0.5.1" }
+llm-observatory-core = { git = "https://github.com/LLM-Dev-Ops/observatory", rev = "6813701693cc85094ea6c52cb00ad4911446b096" }
 
 [profile.release]
 opt-level = 3
