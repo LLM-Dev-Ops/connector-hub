@@ -6,6 +6,17 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { createAuthAgent, AuthAgent, AuthAgentConfig } from '../auth/auth-agent';
 import { AgentContext } from '../base/agent';
 import * as jose from 'jose';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { contract, probeOAuth } from '../../../../security/probe-oauth.mjs';
+
+describe('OAuth introspection native HTTP contract', () => {
+  const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
+  it.each([...contract.holdout, ...contract.anchor])('%s', async (name: string) => {
+    const [result] = await probeOAuth(root, [name]);
+    expect(result?.pass, JSON.stringify(result)).toBe(true);
+  });
+});
 
 // Test fixtures
 const createTestContext = (): AgentContext => ({

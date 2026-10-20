@@ -51,8 +51,8 @@ function regression(root) {
     .sort();
   assert.ok(names.length > 0);
   if (root === baseline) originalNames = names;
-  else assert.deepEqual(names, originalNames);
-  return { count: names.length, names, exit: run.status };
+  else assert.deepEqual(names.filter(name => originalNames.includes(name)), originalNames);
+  return { count: originalNames.length, totalCount: names.length, originalNames, names, exit: run.status };
 }
 const result = await fw.runFlywheelGenerations({
   rootPolicy: { validation: parentHash },

@@ -31,7 +31,7 @@ jobs:
           npm ci --prefix security/tools --ignore-scripts --no-audit --no-fund
       - name: Native HTTP regression tests
         run: |
-          node node_modules/vitest/vitest.mjs run packages/agents/src/__tests__/auth-agent.test.ts packages/agents/src/__tests__/oauth-introspection.test.ts --maxWorkers 1 --minWorkers 1
+          node node_modules/vitest/vitest.mjs run packages/agents/src/__tests__/auth-agent.test.ts --maxWorkers 1 --minWorkers 1
           npm test --prefix security
       - name: Live baseline, Flywheel lineage, replay, rollback and alternating trials
         env:

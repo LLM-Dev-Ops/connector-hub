@@ -4,7 +4,8 @@ The fixed `oauth-contract.json` was frozen before implementation. Its 19 holdout
 exercise the exported OAuth validator against a real loopback HTTP introspection
 server; nine anchors retain valid, revoked, expired and deadline behavior. Neither
 fetch nor token validation is mocked. The 24 existing AuthAgent tests are retained
-separately (they cover other authentication paths too).
+by identity (they cover other authentication paths too). The new cases live in the
+existing AuthAgent suite, alongside those unchanged assertions.
 
 The fix validates the RFC 7662 fields consumed by this validator, including a
 literal boolean `active`, bounded integer timestamps and string claims. Active
@@ -26,7 +27,7 @@ Use Node 20.20.2 (the existing strict dependency engine check rejects Node 24):
 npm ci --ignore-scripts --no-audit --no-fund
 npm run build -w packages/agentics-contracts
 npm test --prefix security
-node node_modules/vitest/vitest.mjs run packages/agents/src/__tests__/auth-agent.test.ts packages/agents/src/__tests__/oauth-introspection.test.ts --maxWorkers 1 --minWorkers 1
+node node_modules/vitest/vitest.mjs run packages/agents/src/__tests__/auth-agent.test.ts --maxWorkers 1 --minWorkers 1
 npm ci --prefix security/tools --ignore-scripts --no-audit --no-fund
 node --import tsx security/evaluate-oauth.mjs BASELINE CANDIDATE security/tools flywheel.json
 node --import tsx security/benchmark-oauth.mjs BASELINE CANDIDATE benchmark.json
