@@ -96,6 +96,33 @@ interface IntrospectionResponse {
   [key: string]: unknown;
 }
 
+/** Introspection is a trust boundary: TypeScript casts do not validate JSON. */
+function isIntrospectionResponse(value: unknown): value is IntrospectionResponse {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;
+  const claims = value as Record<string, unknown>;
+  if (typeof claims['active'] !== 'boolean') return false;
+  // RFC 7662 permits inactive responses containing only the active flag. Ignore
+  // all other fields on these responses; no identity will be returned.
+  if (claims['active'] === false) return true;
+  for (const key of ['scope', 'client_id', 'username', 'token_type', 'sub', 'iss', 'jti']) {
+    if (claims[key] !== undefined && typeof claims[key] !== 'string') return false;
+  }
+  for (const key of ['exp', 'iat', 'nbf']) {
+    const date = claims[key];
+    if (
+      date !== undefined &&
+      (typeof date !== 'number' || !Number.isSafeInteger(date) || date < 0 || date > 8640000000000)
+    )
+      return false;
+  }
+  const audience = claims['aud'];
+  return (
+    audience === undefined ||
+    typeof audience === 'string' ||
+    (Array.isArray(audience) && audience.every((item) => typeof item === 'string'))
+  );
+}
+
 /**
  * Validate OAuth2 token via introspection
  */
@@ -108,10 +135,7 @@ async function introspectToken(
   }
 
   const controller = new AbortController();
-  const timeout = setTimeout(
-    () => controller.abort(),
-    options.timeoutMs ?? 5000
-  );
+  const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? 5000);
 
   try {
     const body = new URLSearchParams();
@@ -124,9 +148,9 @@ async function introspectToken(
 
     // Add client authentication
     if (options.clientId && options.clientSecret) {
-      const credentials = Buffer.from(
-        `${options.clientId}:${options.clientSecret}`
-      ).toString('base64');
+      const credentials = Buffer.from(`${options.clientId}:${options.clientSecret}`).toString(
+        'base64'
+      );
       headers['Authorization'] = `Basic ${credentials}`;
     }
 
@@ -141,7 +165,8 @@ async function introspectToken(
       return null;
     }
 
-    return (await response.json()) as IntrospectionResponse;
+    const result: unknown = await response.json();
+    return isIntrospectionResponse(result) ? result : null;
   } catch {
     return null;
   } finally {
@@ -209,7 +234,7 @@ export async function validateOAuth(
       let expiresAt: string | undefined;
       let expiresInSeconds: number | undefined;
 
-      if (introspectionResult.exp) {
+      if (introspectionResult.exp !== undefined) {
         expiresAt = new Date(introspectionResult.exp * 1000).toISOString();
         const now = Math.floor(Date.now() / 1000);
         expiresInSeconds = Math.max(0, introspectionResult.exp - now);
@@ -236,6 +261,23 @@ export async function validateOAuth(
         confidenceFactors.token_freshness = Math.min(1, expiresInSeconds / 3600);
       }
 
+      const clockSkew = options.clockSkewSeconds ?? 60;
+      if (
+        !Number.isFinite(clockSkew) ||
+        clockSkew < 0 ||
+        (introspectionResult.nbf !== undefined &&
+          introspectionResult.nbf > Math.floor(Date.now() / 1000) + clockSkew)
+      ) {
+        return {
+          valid: false,
+          status: 'not_yet_valid',
+          claims,
+          warnings: ['Token is not yet valid or clock tolerance is invalid'],
+          tokenFingerprint: fingerprint,
+          confidenceFactors,
+        };
+      }
+
       // Check required scopes
       let hasRequiredScopes = true;
       if (options.requiredScopes && options.requiredScopes.length > 0) {
@@ -244,7 +286,8 @@ export async function validateOAuth(
 
         if (!hasRequiredScopes) {
           warnings.push(`Missing required scopes: ${missingScopes.join(', ')}`);
-          confidenceFactors.scope_sufficiency = scopes.length / (scopes.length + missingScopes.length);
+          confidenceFactors.scope_sufficiency =
+            scopes.length / (scopes.length + missingScopes.length);
         } else {
           confidenceFactors.scope_sufficiency = 1;
         }
@@ -274,6 +317,40 @@ export async function validateOAuth(
       confidenceFactors.issuer_trust = options.expectedIssuer ? 1 : 0.7;
       confidenceFactors.claims_completeness = Object.values(claims).filter(Boolean).length / 7;
 
+      if (options.expectedAudience !== undefined) {
+        const expected = Array.isArray(options.expectedAudience)
+          ? options.expectedAudience
+          : [options.expectedAudience];
+        const actual = Array.isArray(introspectionResult.aud)
+          ? introspectionResult.aud
+          : introspectionResult.aud === undefined
+            ? []
+            : [introspectionResult.aud];
+        if (!expected.some((audience) => actual.includes(audience))) {
+          return {
+            valid: false,
+            status: 'audience_mismatch',
+            claims,
+            warnings: ['Token audience does not match the configured audience'],
+            tokenFingerprint: fingerprint,
+            confidenceFactors,
+          };
+        }
+      }
+
+      if (!hasRequiredScopes) {
+        return {
+          valid: false,
+          status: 'scope_insufficient',
+          claims,
+          scopes,
+          hasRequiredScopes: false,
+          warnings,
+          tokenFingerprint: fingerprint,
+          confidenceFactors,
+        };
+      }
+
       return {
         valid: true,
         status: 'valid',
@@ -288,7 +365,15 @@ export async function validateOAuth(
         confidenceFactors,
       };
     } else {
-      warnings.push('Introspection failed - falling back to JWT validation');
+      // A configured authority must not be bypassed by structurally parsing a
+      // JWT after an outage or malformed response (possibly a revoked token).
+      return {
+        valid: false,
+        status: 'unknown',
+        warnings: ['Introspection failed or returned malformed claims'],
+        tokenFingerprint: fingerprint,
+        confidenceFactors,
+      };
     }
   }
 
