@@ -1,0 +1,11 @@
+{
+  "name": "connector-oauth-contract",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --import tsx verify-oauth.mjs"
+  },
+  "engines": {
+    "node": ">=20 <=22"
+  }
+}

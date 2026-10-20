@@ -1,0 +1,58 @@
+name: OAuth Introspection Contract
+
+on:
+  pull_request:
+    branches: [main, develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: oauth-contract-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-http:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.20.2'
+          cache: npm
+      - name: Install locked dependencies without unrelated root lifecycle hooks
+        run: |
+          npm ci --ignore-scripts --no-audit --no-fund
+          npm run build -w packages/agentics-contracts
+          npm ci --prefix security/tools --ignore-scripts --no-audit --no-fund
+      - name: Native HTTP regression tests
+        run: |
+          node node_modules/vitest/vitest.mjs run packages/agents/src/__tests__/auth-agent.test.ts packages/agents/src/__tests__/oauth-introspection.test.ts --maxWorkers 1 --minWorkers 1
+          npm test --prefix security
+      - name: Live baseline, Flywheel lineage, replay, rollback and alternating trials
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || 'b25fcb3bd9a06ae9e7d73c7acd677607123d081d' }}
+        run: |
+          set -euo pipefail
+          baseline="$RUNNER_TEMP/oauth-baseline"
+          git worktree add --detach "$baseline" "$BASE_SHA"
+          # Baseline has an incomplete npm lock. Use the candidate's identical
+          # resolved graph for behavioral comparison; source remains at BASE_SHA.
+          cp package-lock.json "$baseline/package-lock.json"
+          npm ci --prefix "$baseline" --ignore-scripts --no-audit --no-fund
+          npm run build --prefix "$baseline" -w packages/agentics-contracts
+          mkdir oauth-evidence
+          node --import tsx security/evaluate-oauth.mjs "$baseline" "$PWD" "$PWD/security/tools" oauth-evidence/flywheel.json
+          node --import tsx security/benchmark-oauth.mjs "$baseline" "$PWD" oauth-evidence/benchmark.json
+          node --input-type=module -e 'import {readFileSync} from "node:fs"; import {verifyReplayBundle} from "./security/tools/node_modules/@metaharness/flywheel/dist/index.js"; const j=JSON.parse(readFileSync("oauth-evidence/flywheel.json")); if(!verifyReplayBundle(j.replayBundle,{pinnedGateFingerprint:j.fingerprint}).pass) process.exit(1);'
+          git diff "$BASE_SHA" -- packages/agents/src/auth/validators/oauth-validator.ts > oauth-evidence/source.patch
+          git apply --reverse --check oauth-evidence/source.patch
+      - uses: actions/upload-artifact@v4
+        with:
+          name: oauth-introspection-evidence
+          path: oauth-evidence/
+          retention-days: 14
