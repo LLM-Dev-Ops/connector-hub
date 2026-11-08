@@ -156,6 +156,9 @@ async function introspectToken(
 
     const response = await fetch(options.introspectionEndpoint, {
       method: 'POST',
+      // The configured authority must answer directly; redirects may forward
+      // token bodies and same-origin client authentication to another handler.
+      redirect: 'error',
       headers,
       body: body.toString(),
       signal: controller.signal,

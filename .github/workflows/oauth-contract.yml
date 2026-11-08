@@ -17,10 +17,11 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v4
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '20.20.2'
           cache: npm
@@ -51,7 +52,7 @@ jobs:
           node --input-type=module -e 'import {readFileSync} from "node:fs"; import {verifyReplayBundle} from "./security/tools/node_modules/@metaharness/flywheel/dist/index.js"; const j=JSON.parse(readFileSync("oauth-evidence/flywheel.json")); if(!verifyReplayBundle(j.replayBundle,{pinnedGateFingerprint:j.fingerprint}).pass) process.exit(1);'
           git diff "$BASE_SHA" -- packages/agents/src/auth/validators/oauth-validator.ts > oauth-evidence/source.patch
           git apply --reverse --check oauth-evidence/source.patch
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: oauth-introspection-evidence
           path: oauth-evidence/
