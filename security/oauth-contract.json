@@ -1,0 +1,38 @@
+{
+  "id": "connector-oauth-introspection-v1",
+  "frozenBeforeImplementation": "2026-10-20",
+  "holdout": [
+    "active-string",
+    "active-number",
+    "active-array",
+    "exp-zero",
+    "exp-string",
+    "exp-overflow",
+    "exp-out-of-range",
+    "nbf-future",
+    "nbf-string",
+    "iat-string",
+    "aud-mismatch",
+    "aud-missing",
+    "aud-mixed",
+    "missing-scope",
+    "scope-array",
+    "sub-object",
+    "type-number",
+    "introspection-failure-jwt",
+    "invalid-json-jwt"
+  ],
+  "anchor": [
+    "valid",
+    "minimal-active",
+    "inactive",
+    "expired",
+    "issuer-mismatch",
+    "aud-array-match",
+    "scopes-match",
+    "opaque-unconfigured",
+    "body-timeout"
+  ],
+  "acceptance": "Every holdout rejects without throwing; every anchor retains its expected outcome; all existing passing test names remain passing. A configured introspection endpoint is authoritative: failure must not fall back to structural JWT acceptance. Real loopback HTTP, no fetch/clock/crypto mocks. Full repository CI, security and Rust gates remain independent merge requirements.",
+  "timing": "Deadline anchor uses 80 ms timeout and a 400 ms incomplete response; reject within 350 ms. Benchmark is five alternating complete probe trials, including listener and HTTP overhead, not provider throughput or cost."
+}
