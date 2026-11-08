@@ -1,0 +1,1993 @@
+{
+  "parentHash": "748127d306c87179ca2ef13b3fa8373dbb98c3246e2ba3355fe02e5d0612f5e5",
+  "candidateHash": "e8ce2c83b135c8d4ba256ebcb1b5f81e3605e564f41337aa4e32c71a948295c7",
+  "trials": [
+    {
+      "trial": 0,
+      "root": "/tmp/ch8-base",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": true
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 0,
+      "root": "/tmp/ch8-exact",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 1,
+      "root": "/tmp/ch8-exact",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 1,
+      "root": "/tmp/ch8-base",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": true
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 2,
+      "root": "/tmp/ch8-base",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": true
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 2,
+      "root": "/tmp/ch8-exact",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 3,
+      "root": "/tmp/ch8-exact",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 3,
+      "root": "/tmp/ch8-base",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": true
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 4,
+      "root": "/tmp/ch8-base",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": true
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    },
+    {
+      "trial": 4,
+      "root": "/tmp/ch8-exact",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      }
+    }
+  ],
+  "measurements": [
+    {
+      "revision": "748127d306c87179ca2ef13b3fa8373dbb98c3246e2ba3355fe02e5d0612f5e5",
+      "suite": "holdout",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": true
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      },
+      "score": {
+        "primary": 0,
+        "itemWins": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "noopRate": 0,
+        "costPerWin": 0,
+        "regressed": true
+      }
+    },
+    {
+      "revision": "748127d306c87179ca2ef13b3fa8373dbb98c3246e2ba3355fe02e5d0612f5e5",
+      "suite": "anchor",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": false,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 1,
+            "tokenForwarded": true,
+            "clientAuthForwarded": true
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      },
+      "score": {
+        "primary": 1,
+        "itemWins": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "noopRate": 0,
+        "costPerWin": 0,
+        "regressed": true
+      }
+    },
+    {
+      "revision": "e8ce2c83b135c8d4ba256ebcb1b5f81e3605e564f41337aa4e32c71a948295c7",
+      "suite": "holdout",
+      "report": {
+        "holdout": [
+          {
+            "id": "301",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "302",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "303",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "308",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "same-origin-307",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ],
+        "anchors": [
+          {
+            "id": "valid",
+            "passed": true,
+            "valid": true,
+            "status": "valid",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "inactive",
+            "passed": true,
+            "valid": false,
+            "status": "revoked",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "unavailable",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "malformed",
+            "passed": true,
+            "valid": false,
+            "status": "unknown",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "scope",
+            "passed": true,
+            "valid": false,
+            "status": "scope_insufficient",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "issuer",
+            "passed": true,
+            "valid": false,
+            "status": "issuer_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "audience",
+            "passed": true,
+            "valid": false,
+            "status": "audience_mismatch",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          },
+          {
+            "id": "expired",
+            "passed": true,
+            "valid": false,
+            "status": "expired",
+            "destinationRequests": 0,
+            "tokenForwarded": false,
+            "clientAuthForwarded": false
+          }
+        ]
+      },
+      "score": {
+        "primary": 1,
+        "itemWins": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "noopRate": 0,
+        "costPerWin": 0,
+        "regressed": true
+      }
+    }
+  ],
+  "promotions": 0,
+  "fingerprint": "c5942e7c9bf8f28fe7af47a6ec3887d11eeb3f8c8e8601cc6a7a54969ea0b981",
+  "replay": {
+    "pass": true,
+    "checks": {
+      "receipts": true,
+      "reachesRoot": true,
+      "contiguousParents": true,
+      "allPromoted": true,
+      "gateUnchanged": true,
+      "gateReExecutes": true,
+      "allCommitsReceipts": true,
+      "sealedFieldsAuthentic": true
+    },
+    "failures": [],
+    "chainSummary": "gen0(root)"
+  },
+  "replayBundle": {
+    "data_source": "LIVE_NATIVE_HTTP_TYPESCRIPT_OAUTH",
+    "root_id": "root",
+    "chain": [
+      {
+        "id": "root",
+        "generation": 0,
+        "parents": [],
+        "mutation": null,
+        "primaryDelta": 0,
+        "anchorScore": 1,
+        "verdict": "ROOT",
+        "failureReasons": [],
+        "receipt": {
+          "payload": {
+            "kind": "root",
+            "root": "root"
+          },
+          "signature": "+9qpQ3rc9SppBw/rBjMFNcYpLGZYr4Eq5YDF5/4Ccp3d6xLBkrmoDpJXLbGf78hIoLCmhDHv3ssp/1HV/8LvAA==",
+          "publicKey": "MCowBQYDK2VwAyEA8c18iJn8TP3PF8ig5Xla44utfL8mAjE4GfR2Ftz7BVw=",
+          "alg": "ed25519"
+        },
+        "createdAt": "gen-0"
+      }
+    ],
+    "all_commits": [
+      {
+        "id": "root__revision_gen1",
+        "generation": 1,
+        "parents": [
+          "root"
+        ],
+        "mutation": {
+          "target": "revision",
+          "summary": "Fail closed on configured introspection-authority redirects",
+          "inverse": {
+            "path": "packages/agents/src/auth/validators/oauth-validator.ts",
+            "parentBytes": "/**\n * OAuth2 Token Validator\n *\n * Validates OAuth2 access tokens via introspection endpoint (RFC 7662)\n * or by treating them as JWTs.\n */\n\nimport {\n  TokenStatus,\n  IdentityClaims,\n  AuthConfidenceFactors,\n  generateTokenFingerprint,\n} from '@llm-dev-ops/agentics-contracts';\nimport { validateJWT, parseJWTUnsafe } from './jwt-validator';\n\nexport interface OAuthValidationOptions {\n  /** Token introspection endpoint (RFC 7662) */\n  introspectionEndpoint?: string;\n\n  /** Client ID for introspection */\n  clientId?: string;\n\n  /** Client secret for introspection */\n  clientSecret?: string;\n\n  /** Expected issuer */\n  expectedIssuer?: string;\n\n  /** Expected audience */\n  expectedAudience?: string | string[];\n\n  /** Required scopes */\n  requiredScopes?: string[];\n\n  /** JWKS URI for JWT validation */\n  jwksUri?: string;\n\n  /** Clock skew tolerance in seconds */\n  clockSkewSeconds?: number;\n\n  /** Timeout for introspection request in milliseconds */\n  timeoutMs?: number;\n}\n\nexport interface OAuthValidationResult {\n  /** Whether the token is valid */\n  valid: boolean;\n\n  /** Validation status */\n  status: TokenStatus;\n\n  /** Token type (bearer, etc.) */\n  tokenType?: string;\n\n  /** Extracted claims */\n  claims?: IdentityClaims;\n\n  /** Expiration time */\n  expiresAt?: string;\n\n  /** Seconds until expiration */\n  expiresInSeconds?: number;\n\n  /** Scopes in the token */\n  scopes?: string[];\n\n  /** Whether required scopes are present */\n  hasRequiredScopes?: boolean;\n\n  /** Validation warnings */\n  warnings: string[];\n\n  /** Token fingerprint */\n  tokenFingerprint: string;\n\n  /** Confidence factors */\n  confidenceFactors: AuthConfidenceFactors;\n}\n\n/**\n * Introspection response per RFC 7662\n */\ninterface IntrospectionResponse {\n  active: boolean;\n  scope?: string;\n  client_id?: string;\n  username?: string;\n  token_type?: string;\n  exp?: number;\n  iat?: number;\n  nbf?: number;\n  sub?: string;\n  aud?: string | string[];\n  iss?: string;\n  jti?: string;\n  [key: string]: unknown;\n}\n\n/** Introspection is a trust boundary: TypeScript casts do not validate JSON. */\nfunction isIntrospectionResponse(value: unknown): value is IntrospectionResponse {\n  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;\n  const claims = value as Record<string, unknown>;\n  if (typeof claims['active'] !== 'boolean') return false;\n  // RFC 7662 permits inactive responses containing only the active flag. Ignore\n  // all other fields on these responses; no identity will be returned.\n  if (claims['active'] === false) return true;\n  for (const key of ['scope', 'client_id', 'username', 'token_type', 'sub', 'iss', 'jti']) {\n    if (claims[key] !== undefined && typeof claims[key] !== 'string') return false;\n  }\n  for (const key of ['exp', 'iat', 'nbf']) {\n    const date = claims[key];\n    if (\n      date !== undefined &&\n      (typeof date !== 'number' || !Number.isSafeInteger(date) || date < 0 || date > 8640000000000)\n    )\n      return false;\n  }\n  const audience = claims['aud'];\n  return (\n    audience === undefined ||\n    typeof audience === 'string' ||\n    (Array.isArray(audience) && audience.every((item) => typeof item === 'string'))\n  );\n}\n\n/**\n * Validate OAuth2 token via introspection\n */\nasync function introspectToken(\n  token: string,\n  options: OAuthValidationOptions\n): Promise<IntrospectionResponse | null> {\n  if (!options.introspectionEndpoint) {\n    return null;\n  }\n\n  const controller = new AbortController();\n  const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? 5000);\n\n  try {\n    const body = new URLSearchParams();\n    body.append('token', token);\n    body.append('token_type_hint', 'access_token');\n\n    const headers: Record<string, string> = {\n      'Content-Type': 'application/x-www-form-urlencoded',\n    };\n\n    // Add client authentication\n    if (options.clientId && options.clientSecret) {\n      const credentials = Buffer.from(`${options.clientId}:${options.clientSecret}`).toString(\n        'base64'\n      );\n      headers['Authorization'] = `Basic ${credentials}`;\n    }\n\n    const response = await fetch(options.introspectionEndpoint, {\n      method: 'POST',\n      headers,\n      body: body.toString(),\n      signal: controller.signal,\n    });\n\n    if (!response.ok) {\n      return null;\n    }\n\n    const result: unknown = await response.json();\n    return isIntrospectionResponse(result) ? result : null;\n  } catch {\n    return null;\n  } finally {\n    clearTimeout(timeout);\n  }\n}\n\n/**\n * Validate an OAuth2 access token\n */\nexport async function validateOAuth(\n  token: string,\n  options: OAuthValidationOptions = {}\n): Promise<OAuthValidationResult> {\n  const warnings: string[] = [];\n  const fingerprint = generateTokenFingerprint(token);\n\n  // Initialize confidence factors\n  const confidenceFactors: AuthConfidenceFactors = {\n    signature_verification: 0,\n    issuer_trust: 0,\n    token_freshness: 0,\n    claims_completeness: 0,\n  };\n\n  // Check if this looks like a JWT\n  const isJWT = parseJWTUnsafe(token) !== null;\n\n  // Try introspection first if endpoint is configured\n  if (options.introspectionEndpoint) {\n    const introspectionResult = await introspectToken(token, options);\n\n    if (introspectionResult) {\n      if (!introspectionResult.active) {\n        return {\n          valid: false,\n          status: 'revoked',\n          warnings: ['Token is not active according to introspection'],\n          tokenFingerprint: fingerprint,\n          confidenceFactors: {\n            ...confidenceFactors,\n            signature_verification: 1, // We got a definitive answer\n          },\n        };\n      }\n\n      // Build claims from introspection response\n      const claims: IdentityClaims = {\n        sub: introspectionResult.sub,\n        iss: introspectionResult.iss,\n        aud: introspectionResult.aud,\n        exp: introspectionResult.exp,\n        iat: introspectionResult.iat,\n        nbf: introspectionResult.nbf,\n        jti: introspectionResult.jti,\n      };\n\n      // Parse scopes\n      const scopes = introspectionResult.scope?.split(' ').filter(Boolean) ?? [];\n      if (scopes.length > 0) {\n        claims.scope = scopes;\n      }\n\n      // Check expiration\n      let expiresAt: string | undefined;\n      let expiresInSeconds: number | undefined;\n\n      if (introspectionResult.exp !== undefined) {\n        expiresAt = new Date(introspectionResult.exp * 1000).toISOString();\n        const now = Math.floor(Date.now() / 1000);\n        expiresInSeconds = Math.max(0, introspectionResult.exp - now);\n\n        if (expiresInSeconds === 0) {\n          return {\n            valid: false,\n            status: 'expired',\n            tokenType: introspectionResult.token_type,\n            claims,\n            expiresAt,\n            expiresInSeconds: 0,\n            scopes,\n            warnings: ['Token has expired'],\n            tokenFingerprint: fingerprint,\n            confidenceFactors: {\n              ...confidenceFactors,\n              signature_verification: 1,\n              token_freshness: 0,\n            },\n          };\n        }\n\n        confidenceFactors.token_freshness = Math.min(1, expiresInSeconds / 3600);\n      }\n\n      const clockSkew = options.clockSkewSeconds ?? 60;\n      if (\n        !Number.isFinite(clockSkew) ||\n        clockSkew < 0 ||\n        (introspectionResult.nbf !== undefined &&\n          introspectionResult.nbf > Math.floor(Date.now() / 1000) + clockSkew)\n      ) {\n        return {\n          valid: false,\n          status: 'not_yet_valid',\n          claims,\n          warnings: ['Token is not yet valid or clock tolerance is invalid'],\n          tokenFingerprint: fingerprint,\n          confidenceFactors,\n        };\n      }\n\n      // Check required scopes\n      let hasRequiredScopes = true;\n      if (options.requiredScopes && options.requiredScopes.length > 0) {\n        const missingScopes = options.requiredScopes.filter((s) => !scopes.includes(s));\n        hasRequiredScopes = missingScopes.length === 0;\n\n        if (!hasRequiredScopes) {\n          warnings.push(`Missing required scopes: ${missingScopes.join(', ')}`);\n          confidenceFactors.scope_sufficiency =\n            scopes.length / (scopes.length + missingScopes.length);\n        } else {\n          confidenceFactors.scope_sufficiency = 1;\n        }\n      }\n\n      // Check issuer\n      if (options.expectedIssuer && introspectionResult.iss !== options.expectedIssuer) {\n        return {\n          valid: false,\n          status: 'issuer_mismatch',\n          tokenType: introspectionResult.token_type,\n          claims,\n          expiresAt,\n          expiresInSeconds,\n          scopes,\n          warnings: [`Expected issuer ${options.expectedIssuer}, got ${introspectionResult.iss}`],\n          tokenFingerprint: fingerprint,\n          confidenceFactors: {\n            ...confidenceFactors,\n            signature_verification: 1,\n            issuer_trust: 0,\n          },\n        };\n      }\n\n      confidenceFactors.signature_verification = 1;\n      confidenceFactors.issuer_trust = options.expectedIssuer ? 1 : 0.7;\n      confidenceFactors.claims_completeness = Object.values(claims).filter(Boolean).length / 7;\n\n      if (options.expectedAudience !== undefined) {\n        const expected = Array.isArray(options.expectedAudience)\n          ? options.expectedAudience\n          : [options.expectedAudience];\n        const actual = Array.isArray(introspectionResult.aud)\n          ? introspectionResult.aud\n          : introspectionResult.aud === undefined\n            ? []\n            : [introspectionResult.aud];\n        if (!expected.some((audience) => actual.includes(audience))) {\n          return {\n            valid: false,\n            status: 'audience_mismatch',\n            claims,\n            warnings: ['Token audience does not match the configured audience'],\n            tokenFingerprint: fingerprint,\n            confidenceFactors,\n          };\n        }\n      }\n\n      if (!hasRequiredScopes) {\n        return {\n          valid: false,\n          status: 'scope_insufficient',\n          claims,\n          scopes,\n          hasRequiredScopes: false,\n          warnings,\n          tokenFingerprint: fingerprint,\n          confidenceFactors,\n        };\n      }\n\n      return {\n        valid: true,\n        status: 'valid',\n        tokenType: introspectionResult.token_type ?? 'bearer',\n        claims,\n        expiresAt,\n        expiresInSeconds,\n        scopes,\n        hasRequiredScopes,\n        warnings,\n        tokenFingerprint: fingerprint,\n        confidenceFactors,\n      };\n    } else {\n      // A configured authority must not be bypassed by structurally parsing a\n      // JWT after an outage or malformed response (possibly a revoked token).\n      return {\n        valid: false,\n        status: 'unknown',\n        warnings: ['Introspection failed or returned malformed claims'],\n        tokenFingerprint: fingerprint,\n        confidenceFactors,\n      };\n    }\n  }\n\n  // Fall back to JWT validation if the token looks like a JWT\n  if (isJWT) {\n    const jwtResult = await validateJWT(token, {\n      expectedIssuer: options.expectedIssuer,\n      expectedAudience: options.expectedAudience,\n      requiredScopes: options.requiredScopes,\n      jwksUri: options.jwksUri,\n      clockSkewSeconds: options.clockSkewSeconds,\n    });\n\n    return {\n      valid: jwtResult.valid,\n      status: jwtResult.status,\n      tokenType: 'bearer',\n      claims: jwtResult.claims,\n      expiresAt: jwtResult.expiresAt,\n      expiresInSeconds: jwtResult.expiresInSeconds,\n      scopes: jwtResult.scopes,\n      hasRequiredScopes: jwtResult.hasRequiredScopes,\n      warnings: [...warnings, ...jwtResult.warnings],\n      tokenFingerprint: fingerprint,\n      confidenceFactors: jwtResult.confidenceFactors,\n    };\n  }\n\n  // Opaque token without introspection endpoint\n  warnings.push('Opaque token cannot be validated without introspection endpoint');\n\n  return {\n    valid: false,\n    status: 'unknown',\n    tokenType: 'bearer',\n    warnings,\n    tokenFingerprint: fingerprint,\n    confidenceFactors,\n  };\n}\n",
+            "parentSha256": "748127d306c87179ca2ef13b3fa8373dbb98c3246e2ba3355fe02e5d0612f5e5"
+          }
+        },
+        "primaryDelta": 1,
+        "anchorScore": null,
+        "verdict": "REJECTED",
+        "failureReasons": [
+          "safety_regressed"
+        ],
+        "receipt": {
+          "payload": {
+            "kind": "candidate",
+            "id": "root__revision_gen1",
+            "target": "revision",
+            "verdict": "REJECTED",
+            "primaryDelta": 1,
+            "baselineScore": {
+              "primary": 0,
+              "itemWins": [
+                false,
+                false,
+                false,
+                false,
+                false,
+                false
+              ],
+              "noopRate": 0,
+              "costPerWin": 0,
+              "regressed": true
+            },
+            "candidateScore": {
+              "primary": 1,
+              "itemWins": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+              ],
+              "noopRate": 0,
+              "costPerWin": 0,
+              "regressed": true
+            },
+            "anchorScore": null,
+            "failureReasons": [
+              "safety_regressed"
+            ],
+            "parents": [
+              "root"
+            ],
+            "generation": 1
+          },
+          "signature": "V8oU9TsRDDCY50kAZtVlXpA/h6jym5+si9rynwHcjhUXeKbfE4VBhcn4kgoHBw5QTbjY3ZDcj7BS4ofRzJB3Bg==",
+          "publicKey": "MCowBQYDK2VwAyEA8c18iJn8TP3PF8ig5Xla44utfL8mAjE4GfR2Ftz7BVw=",
+          "alg": "ed25519"
+        },
+        "createdAt": "gen-1",
+        "baselineScore": {
+          "primary": 0,
+          "itemWins": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "noopRate": 0,
+          "costPerWin": 0,
+          "regressed": true
+        },
+        "candidateScore": {
+          "primary": 1,
+          "itemWins": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "noopRate": 0,
+          "costPerWin": 0,
+          "regressed": true
+        }
+      }
+    ],
+    "lift_curve": [
+      {
+        "generation": 0,
+        "primary": 0,
+        "delta": 0,
+        "anchor": 1
+      }
+    ],
+    "gate_fingerprint": "c5942e7c9bf8f28fe7af47a6ec3887d11eeb3f8c8e8601cc6a7a54969ea0b981",
+    "verified_improvements": 0,
+    "anchor_surviving_improvements": 0,
+    "milestone_reached": false,
+    "created_at": "gen-1"
+  },
+  "inverse": {
+    "path": "packages/agents/src/auth/validators/oauth-validator.ts",
+    "parentBytes": "/**\n * OAuth2 Token Validator\n *\n * Validates OAuth2 access tokens via introspection endpoint (RFC 7662)\n * or by treating them as JWTs.\n */\n\nimport {\n  TokenStatus,\n  IdentityClaims,\n  AuthConfidenceFactors,\n  generateTokenFingerprint,\n} from '@llm-dev-ops/agentics-contracts';\nimport { validateJWT, parseJWTUnsafe } from './jwt-validator';\n\nexport interface OAuthValidationOptions {\n  /** Token introspection endpoint (RFC 7662) */\n  introspectionEndpoint?: string;\n\n  /** Client ID for introspection */\n  clientId?: string;\n\n  /** Client secret for introspection */\n  clientSecret?: string;\n\n  /** Expected issuer */\n  expectedIssuer?: string;\n\n  /** Expected audience */\n  expectedAudience?: string | string[];\n\n  /** Required scopes */\n  requiredScopes?: string[];\n\n  /** JWKS URI for JWT validation */\n  jwksUri?: string;\n\n  /** Clock skew tolerance in seconds */\n  clockSkewSeconds?: number;\n\n  /** Timeout for introspection request in milliseconds */\n  timeoutMs?: number;\n}\n\nexport interface OAuthValidationResult {\n  /** Whether the token is valid */\n  valid: boolean;\n\n  /** Validation status */\n  status: TokenStatus;\n\n  /** Token type (bearer, etc.) */\n  tokenType?: string;\n\n  /** Extracted claims */\n  claims?: IdentityClaims;\n\n  /** Expiration time */\n  expiresAt?: string;\n\n  /** Seconds until expiration */\n  expiresInSeconds?: number;\n\n  /** Scopes in the token */\n  scopes?: string[];\n\n  /** Whether required scopes are present */\n  hasRequiredScopes?: boolean;\n\n  /** Validation warnings */\n  warnings: string[];\n\n  /** Token fingerprint */\n  tokenFingerprint: string;\n\n  /** Confidence factors */\n  confidenceFactors: AuthConfidenceFactors;\n}\n\n/**\n * Introspection response per RFC 7662\n */\ninterface IntrospectionResponse {\n  active: boolean;\n  scope?: string;\n  client_id?: string;\n  username?: string;\n  token_type?: string;\n  exp?: number;\n  iat?: number;\n  nbf?: number;\n  sub?: string;\n  aud?: string | string[];\n  iss?: string;\n  jti?: string;\n  [key: string]: unknown;\n}\n\n/** Introspection is a trust boundary: TypeScript casts do not validate JSON. */\nfunction isIntrospectionResponse(value: unknown): value is IntrospectionResponse {\n  if (!value || typeof value !== 'object' || Array.isArray(value)) return false;\n  const claims = value as Record<string, unknown>;\n  if (typeof claims['active'] !== 'boolean') return false;\n  // RFC 7662 permits inactive responses containing only the active flag. Ignore\n  // all other fields on these responses; no identity will be returned.\n  if (claims['active'] === false) return true;\n  for (const key of ['scope', 'client_id', 'username', 'token_type', 'sub', 'iss', 'jti']) {\n    if (claims[key] !== undefined && typeof claims[key] !== 'string') return false;\n  }\n  for (const key of ['exp', 'iat', 'nbf']) {\n    const date = claims[key];\n    if (\n      date !== undefined &&\n      (typeof date !== 'number' || !Number.isSafeInteger(date) || date < 0 || date > 8640000000000)\n    )\n      return false;\n  }\n  const audience = claims['aud'];\n  return (\n    audience === undefined ||\n    typeof audience === 'string' ||\n    (Array.isArray(audience) && audience.every((item) => typeof item === 'string'))\n  );\n}\n\n/**\n * Validate OAuth2 token via introspection\n */\nasync function introspectToken(\n  token: string,\n  options: OAuthValidationOptions\n): Promise<IntrospectionResponse | null> {\n  if (!options.introspectionEndpoint) {\n    return null;\n  }\n\n  const controller = new AbortController();\n  const timeout = setTimeout(() => controller.abort(), options.timeoutMs ?? 5000);\n\n  try {\n    const body = new URLSearchParams();\n    body.append('token', token);\n    body.append('token_type_hint', 'access_token');\n\n    const headers: Record<string, string> = {\n      'Content-Type': 'application/x-www-form-urlencoded',\n    };\n\n    // Add client authentication\n    if (options.clientId && options.clientSecret) {\n      const credentials = Buffer.from(`${options.clientId}:${options.clientSecret}`).toString(\n        'base64'\n      );\n      headers['Authorization'] = `Basic ${credentials}`;\n    }\n\n    const response = await fetch(options.introspectionEndpoint, {\n      method: 'POST',\n      headers,\n      body: body.toString(),\n      signal: controller.signal,\n    });\n\n    if (!response.ok) {\n      return null;\n    }\n\n    const result: unknown = await response.json();\n    return isIntrospectionResponse(result) ? result : null;\n  } catch {\n    return null;\n  } finally {\n    clearTimeout(timeout);\n  }\n}\n\n/**\n * Validate an OAuth2 access token\n */\nexport async function validateOAuth(\n  token: string,\n  options: OAuthValidationOptions = {}\n): Promise<OAuthValidationResult> {\n  const warnings: string[] = [];\n  const fingerprint = generateTokenFingerprint(token);\n\n  // Initialize confidence factors\n  const confidenceFactors: AuthConfidenceFactors = {\n    signature_verification: 0,\n    issuer_trust: 0,\n    token_freshness: 0,\n    claims_completeness: 0,\n  };\n\n  // Check if this looks like a JWT\n  const isJWT = parseJWTUnsafe(token) !== null;\n\n  // Try introspection first if endpoint is configured\n  if (options.introspectionEndpoint) {\n    const introspectionResult = await introspectToken(token, options);\n\n    if (introspectionResult) {\n      if (!introspectionResult.active) {\n        return {\n          valid: false,\n          status: 'revoked',\n          warnings: ['Token is not active according to introspection'],\n          tokenFingerprint: fingerprint,\n          confidenceFactors: {\n            ...confidenceFactors,\n            signature_verification: 1, // We got a definitive answer\n          },\n        };\n      }\n\n      // Build claims from introspection response\n      const claims: IdentityClaims = {\n        sub: introspectionResult.sub,\n        iss: introspectionResult.iss,\n        aud: introspectionResult.aud,\n        exp: introspectionResult.exp,\n        iat: introspectionResult.iat,\n        nbf: introspectionResult.nbf,\n        jti: introspectionResult.jti,\n      };\n\n      // Parse scopes\n      const scopes = introspectionResult.scope?.split(' ').filter(Boolean) ?? [];\n      if (scopes.length > 0) {\n        claims.scope = scopes;\n      }\n\n      // Check expiration\n      let expiresAt: string | undefined;\n      let expiresInSeconds: number | undefined;\n\n      if (introspectionResult.exp !== undefined) {\n        expiresAt = new Date(introspectionResult.exp * 1000).toISOString();\n        const now = Math.floor(Date.now() / 1000);\n        expiresInSeconds = Math.max(0, introspectionResult.exp - now);\n\n        if (expiresInSeconds === 0) {\n          return {\n            valid: false,\n            status: 'expired',\n            tokenType: introspectionResult.token_type,\n            claims,\n            expiresAt,\n            expiresInSeconds: 0,\n            scopes,\n            warnings: ['Token has expired'],\n            tokenFingerprint: fingerprint,\n            confidenceFactors: {\n              ...confidenceFactors,\n              signature_verification: 1,\n              token_freshness: 0,\n            },\n          };\n        }\n\n        confidenceFactors.token_freshness = Math.min(1, expiresInSeconds / 3600);\n      }\n\n      const clockSkew = options.clockSkewSeconds ?? 60;\n      if (\n        !Number.isFinite(clockSkew) ||\n        clockSkew < 0 ||\n        (introspectionResult.nbf !== undefined &&\n          introspectionResult.nbf > Math.floor(Date.now() / 1000) + clockSkew)\n      ) {\n        return {\n          valid: false,\n          status: 'not_yet_valid',\n          claims,\n          warnings: ['Token is not yet valid or clock tolerance is invalid'],\n          tokenFingerprint: fingerprint,\n          confidenceFactors,\n        };\n      }\n\n      // Check required scopes\n      let hasRequiredScopes = true;\n      if (options.requiredScopes && options.requiredScopes.length > 0) {\n        const missingScopes = options.requiredScopes.filter((s) => !scopes.includes(s));\n        hasRequiredScopes = missingScopes.length === 0;\n\n        if (!hasRequiredScopes) {\n          warnings.push(`Missing required scopes: ${missingScopes.join(', ')}`);\n          confidenceFactors.scope_sufficiency =\n            scopes.length / (scopes.length + missingScopes.length);\n        } else {\n          confidenceFactors.scope_sufficiency = 1;\n        }\n      }\n\n      // Check issuer\n      if (options.expectedIssuer && introspectionResult.iss !== options.expectedIssuer) {\n        return {\n          valid: false,\n          status: 'issuer_mismatch',\n          tokenType: introspectionResult.token_type,\n          claims,\n          expiresAt,\n          expiresInSeconds,\n          scopes,\n          warnings: [`Expected issuer ${options.expectedIssuer}, got ${introspectionResult.iss}`],\n          tokenFingerprint: fingerprint,\n          confidenceFactors: {\n            ...confidenceFactors,\n            signature_verification: 1,\n            issuer_trust: 0,\n          },\n        };\n      }\n\n      confidenceFactors.signature_verification = 1;\n      confidenceFactors.issuer_trust = options.expectedIssuer ? 1 : 0.7;\n      confidenceFactors.claims_completeness = Object.values(claims).filter(Boolean).length / 7;\n\n      if (options.expectedAudience !== undefined) {\n        const expected = Array.isArray(options.expectedAudience)\n          ? options.expectedAudience\n          : [options.expectedAudience];\n        const actual = Array.isArray(introspectionResult.aud)\n          ? introspectionResult.aud\n          : introspectionResult.aud === undefined\n            ? []\n            : [introspectionResult.aud];\n        if (!expected.some((audience) => actual.includes(audience))) {\n          return {\n            valid: false,\n            status: 'audience_mismatch',\n            claims,\n            warnings: ['Token audience does not match the configured audience'],\n            tokenFingerprint: fingerprint,\n            confidenceFactors,\n          };\n        }\n      }\n\n      if (!hasRequiredScopes) {\n        return {\n          valid: false,\n          status: 'scope_insufficient',\n          claims,\n          scopes,\n          hasRequiredScopes: false,\n          warnings,\n          tokenFingerprint: fingerprint,\n          confidenceFactors,\n        };\n      }\n\n      return {\n        valid: true,\n        status: 'valid',\n        tokenType: introspectionResult.token_type ?? 'bearer',\n        claims,\n        expiresAt,\n        expiresInSeconds,\n        scopes,\n        hasRequiredScopes,\n        warnings,\n        tokenFingerprint: fingerprint,\n        confidenceFactors,\n      };\n    } else {\n      // A configured authority must not be bypassed by structurally parsing a\n      // JWT after an outage or malformed response (possibly a revoked token).\n      return {\n        valid: false,\n        status: 'unknown',\n        warnings: ['Introspection failed or returned malformed claims'],\n        tokenFingerprint: fingerprint,\n        confidenceFactors,\n      };\n    }\n  }\n\n  // Fall back to JWT validation if the token looks like a JWT\n  if (isJWT) {\n    const jwtResult = await validateJWT(token, {\n      expectedIssuer: options.expectedIssuer,\n      expectedAudience: options.expectedAudience,\n      requiredScopes: options.requiredScopes,\n      jwksUri: options.jwksUri,\n      clockSkewSeconds: options.clockSkewSeconds,\n    });\n\n    return {\n      valid: jwtResult.valid,\n      status: jwtResult.status,\n      tokenType: 'bearer',\n      claims: jwtResult.claims,\n      expiresAt: jwtResult.expiresAt,\n      expiresInSeconds: jwtResult.expiresInSeconds,\n      scopes: jwtResult.scopes,\n      hasRequiredScopes: jwtResult.hasRequiredScopes,\n      warnings: [...warnings, ...jwtResult.warnings],\n      tokenFingerprint: fingerprint,\n      confidenceFactors: jwtResult.confidenceFactors,\n    };\n  }\n\n  // Opaque token without introspection endpoint\n  warnings.push('Opaque token cannot be validated without introspection endpoint');\n\n  return {\n    valid: false,\n    status: 'unknown',\n    tokenType: 'bearer',\n    warnings,\n    tokenFingerprint: fingerprint,\n    confidenceFactors,\n  };\n}\n",
+    "parentSha256": "748127d306c87179ca2ef13b3fa8373dbb98c3246e2ba3355fe02e5d0612f5e5"
+  },
+  "contract": {
+    "baseline": "7ac8863570764c4ebb15611e13b8a04fabc5b27d",
+    "acceptance": "Reject301/302/303/307/308 and same-origin307 introspection redirects, contact no redirect destinations, retain8 direct-authority anchors and all existing passing assertion identities",
+    "trials": 5,
+    "darwin_generations": 1,
+    "darwin_children": 1,
+    "scope": "Actual exported OAuth TypeScript validator through pinned tsx and native HTTP/fetch; no provider, crypto, fetch or clock mocks",
+    "full_gate": "No merge until repository checks, security, CI and protections pass; no publication/deployment"
+  },
+  "probeSha256": "fca062acafd2a4009364c6e5304dbf82e5ebcef2da69426c44dc7869b00cbbfd",
+  "boundary": "regressed=true is the explicit fail-closed full-repository veto, not newly measured component regression. Zero cost/noop neutral and unmeasured. Root-only replay is not candidate promotion proof. Source rollback never erases append-only memory."
+}

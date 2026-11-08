@@ -1,0 +1,105 @@
+{
+  "logs": {
+    "/tmp/ch8-rust-test.log": {
+      "bytes": 629,
+      "sha256": "f89d928dab60305a80f77c70504f8476d85ba79f3065c31a2ccafafac45ccd08",
+      "truncated": false,
+      "text": "    Updating git repository `https://github.com/LLM-Dev-Ops/schema-registry`\nerror: failed to get `schema-registry-core` as a dependency of package `connector-hub-core v0.1.0 (/tmp/connector-nov8am/crates/core)`\n\nCaused by:\n  failed to load source for dependency `schema-registry-core`\n\nCaused by:\n  unable to update https://github.com/LLM-Dev-Ops/schema-registry?rev=65d7501bcd6649f63e945e8f9d987e11ea58963f#65d7501b\n\nCaused by:\n  could not write to '/home/ruv/.cargo/git/checkouts/schema-registry-9693523527b6344b/65d7501/sdks/rust/target/debug/deps/libserde_core-ba7d33a2c74273fb.rmeta': No space left on device; class=Os (2)\n"
+    },
+    "/tmp/ch8-rust-temp.log": {
+      "bytes": 10979,
+      "sha256": "505f091de84cdc56d204ec8865047f7717f0c465d6eb6141efd9168aa189a926",
+      "truncated": true,
+      "text": "    Updating crates.io index\n    Updating git repository `https://github.com/LLM-Dev-Ops/config-manager`\n    Updating git repository `https://github.com/LLM-Dev-Ops/observatory`\n    Updating git repository `https://github.com/LLM-Dev-Ops/schema-registry`\nwarning: skipping duplicate package `schema-registry-core v0.1.0 (https://github.com/LLM-Dev-Ops/schema-registry?rev=65d7501bcd6649f63e945e8f9d987e11ea58963f#65d7501b)`:\n  /tmp/ch8-cargo/git/checkouts/schema-registry-9693523527b6344b/65d7501/crates/core/Cargo.toml\nin favor of /tmp/ch8-cargo/git/checkouts/schema-registry-9693523527b6344b/65d7501/crates/schema-registry-core/Cargo.toml\n\n Downloading crates ...\n  Downloaded aead v0.5.2\n  Downloaded block-buffer v0.10.4\n  Downloaded zeroize_derive v1.4.2\n  Downloaded adler32 v1.2.0\n  Downloaded bit-vec v0.6.3\n  Downloaded zerotrie v0.2.3\n  Downloaded anes v0.1.6\n  Downloaded bumpalo v3.19.0\n \n[TRUNCATED]\ng num-integer v0.1.46\n   Compiling icu_normalizer_data v2.1.1\n   Compiling icu_properties_data v2.1.1\n   Compiling find-msvc-tools v0.1.5\n   Compiling crc32fast v1.5.0\n   Compiling shlex v1.3.0\n   Compiling inout v0.1.4\n   Compiling bumpalo v3.19.0\n   Compiling cc v1.2.48\n   Compiling futures-sink v0.3.31\n   Compiling futures-core v0.3.31\n   Compiling parking_lot_core v0.8.6\n   Compiling num-bigint v0.4.6\n   Compiling wasm-bindgen v0.2.106\n   Compiling indexmap v2.12.1\n   Compiling uuid v1.19.0\n   Compiling universal-hash v0.5.1\n   Compiling instant v0.1.13\n   Compiling base64ct v1.8.0\n   Compiling utf8parse v0.2.2\n   Compiling synstructure v0.13.2\n   Compiling wasm-bindgen-macro-support v0.2.106\n   Compiling opaque-debug v0.3.1\n   Compiling poly1305 v0.8.0\n   Compiling anstyle-parse v0.2.7\n   Compiling password-hash v0.5.0\n   Compiling futures-channel v0.3.31\n   Compiling ring v0.17.14\n"
+    },
+    "/tmp/ch8-rust-build.log": {
+      "bytes": 2120,
+      "sha256": "9e57196d4ba179816d31438046c4bd16f88ba12894ca6ebf162c2c2f4c05e4cd",
+      "truncated": true,
+      "text": "warning: skipping duplicate package `schema-registry-core v0.1.0 (https://github.com/LLM-Dev-Ops/schema-registry?rev=65d7501bcd6649f63e945e8f9d987e11ea58963f#65d7501b)`:\n  /tmp/ch8-cargo/git/checkouts/schema-registry-9693523527b6344b/65d7501/crates/core/Cargo.toml\nin favor of /tmp/ch8-cargo/git/checkouts/schema-registry-9693523527b6344b/65d7501/crates/schema-registry-core/Cargo.toml\n\n   Compiling serde_core v1.0.228\n   Compiling serde v1.0.228\n   Compiling num-traits v0.2.19\n   Compiling syn v2.0.111\n   Compiling zerocopy v0.8.31\n   Compiling regex-automata v0.4.13\n   Compiling ring v0.17.14\n   Compiling password-hash v0.5.0\n   Compiling parking_lot_core v0.8.6\n   Compiling futures-channel v0.3.31\n   Compiling blake2 v0.10.6\n   Compiling aead v0.5.2\n   Compiling pin-utils v0.1.0\n   Compiling untrusted v0.9.0\n   Compiling either v1.15.0\n   Compiling futures-task v0.3.31\n   Compiling winno\n[TRUNCATED]\niling ppv-lite86 v0.2.21\n   Compiling rand_chacha v0.3.1\n   Compiling serde_json v1.0.145\n   Compiling uuid v1.19.0\n   Compiling rand v0.8.5\n   Compiling num-rational v0.4.2\n   Compiling argon2 v0.5.3\n   Compiling parking_lot v0.11.2\n   Compiling synstructure v0.13.2\n   Compiling wasm-bindgen-macro-support v0.2.106\n   Compiling fs2 v0.4.3\n   Compiling ahash v0.8.12\n   Compiling core2 v0.4.0\n   Compiling is_terminal_polyfill v1.70.2\n   Compiling anstyle v1.0.13\n   Compiling colorchoice v1.0.4\n   Compiling rle-decode-fast v1.0.3\n   Compiling bit-vec v0.6.3\n   Compiling anstyle-query v1.1.5\n   Compiling hex v0.4.3\n   Compiling base64 v0.21.7\n   Compiling num-conv v0.1.0\n   Compiling powerfmt v0.2.0\n   Compiling utf8_iter v1.0.4\n   Compiling time-core v0.1.6\n   Compiling percent-encoding v2.3.2\n   Compiling unsafe-libyaml v0.2.11\n   Compiling deranged v0.5.5\n   Compiling time-macros v0.2.24\n"
+    },
+    "/tmp/ch8-clippy.log": {
+      "bytes": 4355,
+      "sha256": "012064c5f6f31b17c075b6ea1901be4314b50791377f41ff36895ae13dd6f297",
+      "truncated": true,
+      "text": "warning: skipping duplicate package `schema-registry-core v0.1.0 (https://github.com/LLM-Dev-Ops/schema-registry?rev=65d7501bcd6649f63e945e8f9d987e11ea58963f#65d7501b)`:\n  /tmp/ch8-cargo/git/checkouts/schema-registry-9693523527b6344b/65d7501/crates/core/Cargo.toml\nin favor of /tmp/ch8-cargo/git/checkouts/schema-registry-9693523527b6344b/65d7501/crates/schema-registry-core/Cargo.toml\n\n   Compiling unicode-ident v1.0.22\n    Checking cfg-if v1.0.4\n    Checking memchr v2.7.6\n    Checking libc v0.2.178\n    Checking serde_core v1.0.228\n    Checking smallvec v1.15.1\n    Checking num-traits v0.2.19\n    Checking once_cell v1.21.3\n    Checking typenum v1.19.0\n   Compiling proc-macro2 v1.0.103\n    Checking ryu v1.0.20\n    Checking itoa v1.0.15\n    Checking pin-project-lite v0.2.16\n    Checking scopeguard v1.2.0\n    Checking stable_deref_trait v1.2.1\n    Checking lock_api v0.4.14\n    Checking tracin\n[TRUNCATED]\n v0.1.45\n    Checking crossbeam-deque v0.8.6\n    Checking sharded-slab v0.1.7\n    Checking tracing-log v0.2.0\n    Checking fs2 v0.4.3\n    Checking num-complex v0.4.6\n    Checking core2 v0.4.0\n    Checking thread_local v1.1.9\n   Compiling num-conv v0.1.0\n    Checking hex v0.4.3\n    Checking base64 v0.21.7\n    Checking plotters-backend v0.3.7\n   Compiling time-core v0.1.6\n    Checking bit-vec v0.6.3\n    Checking utf8_iter v1.0.4\n    Checking nu-ansi-term v0.50.3\n    Checking ciborium-io v0.2.2\n    Checking rle-decode-fast v1.0.3\n    Checking unsafe-libyaml v0.2.11\n    Checking percent-encoding v2.3.2\n   Compiling rustix v1.1.2\n    Checking powerfmt v0.2.0\n    Checking form_urlencoded v1.2.2\n    Checking regex v1.12.2\n    Checking matchers v0.2.0\n    Checking deranged v0.5.5\n    Checking libflate_lz77 v2.2.0\n   Compiling synstructure v0.13.2\n   Compiling wasm-bindgen-macro-support v0.2.106\n"
+    },
+    "/tmp/ch8-rust-fmt.log": {
+      "bytes": 13484,
+      "sha256": "b9e7471c5650047c0a567c3f5717b3060c7d1f73d48defcd91c645be1bb50f51",
+      "truncated": true,
+      "text": "Diff in /tmp/connector-nov8am/connector-hub-benchmarks/src/bin/run_benchmarks.rs:57:\n \n     // Initialize logging\n     let subscriber = FmtSubscriber::builder()\n\u001b[31m-        .with_max_level(if cli.verbose { Level::DEBUG } else { Level::INFO })\n\u001b[m\u000f\u001b[32m+        .with_max_level(if cli.verbose {\n\u001b[m\u000f\u001b[32m+            Level::DEBUG\n\u001b[m\u000f\u001b[32m+        } else {\n\u001b[m\u000f\u001b[32m+            Level::INFO\n\u001b[m\u000f\u001b[32m+        })\n\u001b[m\u000f         .with_target(false)\n         .finish();\n     tracing::subscriber::set_global_default(subscriber)\nDiff in /tmp/connector-nov8am/connector-hub-benchmarks/src/bin/run_benchmarks.rs:189:\n     }\n \n     println!(\"\\n{}\", \"-\".repeat(60));\n\u001b[31m-    println!(\n\u001b[m\u000f\u001b[31m-        \"{:<30} {:>10} {:>15}\",\n\u001b[m\u000f\u001b[31m-        \"Target\", \"Status\", \"Mean (us)\"\n\u001b[m\u000f\u001b[31m-    );\n\u001b[m\u000f\u001b[32m+    println!(\"{:<30} {:>10} {:>15}\", \"Target\", \"Status\", \"Mean (us)\");\n\u001b[m\u000f     println!(\"{}\", \"-\".repea\n[TRUNCATED]\nn record_usage(&mut self, span_id: &str, prompt_tokens: u32, completion_tokens: u32)\n\u001b[m\u000f\u001b[31m-        -> Result<()>;\n\u001b[m\u000f\u001b[32m+    fn record_usage(\n\u001b[m\u000f\u001b[32m+        &mut self,\n\u001b[m\u000f\u001b[32m+        span_id: &str,\n\u001b[m\u000f\u001b[32m+        prompt_tokens: u32,\n\u001b[m\u000f\u001b[32m+        completion_tokens: u32,\n\u001b[m\u000f\u001b[32m+    ) -> Result<()>;\n\u001b[m\u000f }\n \n impl TelemetryCollector for SpanAdapter {\nDiff in /tmp/connector-nov8am/crates/core/src/adapters/telemetry.rs:450:\n         let active_span = adapter.active_spans.get(&span_id).unwrap();\n         let cost = active_span.span.cost.as_ref().unwrap();\n         assert_eq!(cost.amount_usd, 0.05);\n\u001b[31m-        assert_eq!(cost.prompt_cost.unwrap() + cost.completion_cost.unwrap(), 0.05);\n\u001b[m\u000f\u001b[32m+        assert_eq!(\n\u001b[m\u000f\u001b[32m+            cost.prompt_cost.unwrap() + cost.completion_cost.unwrap(),\n\u001b[m\u000f\u001b[32m+            0.05\n\u001b[m\u000f\u001b[32m+        );\n\u001b[m\u000f     }\n \n     #[test]\n"
+    },
+    "/tmp/ch8-agent.log": {
+      "bytes": 983,
+      "sha256": "7c49b761ff1c878f68bed211a10d4ee0b262523ffd53e960b39c66d96bca38f4",
+      "truncated": false,
+      "text": "{\"success\":true,\"agentId\":\"ch8-review\",\"agentType\":\"tester\",\"model\":\"inherit\",\"modelRoutedBy\":\"explicit\",\"status\":\"registered\",\"createdAt\":\"2026-11-08T13:15:32.475Z\",\"note\":\"Agent registered for coordination. Three execution paths: (1) call agent_execute(agentId, prompt) — direct LLM call via Anthropic Messages API (requires ANTHROPIC_API_KEY); (2) Claude Code Task tool — spawns a real subagent; (3) claude -p — headless background instance.\"}\n{\"success\":false,\"agentId\":\"ch8-review\",\"model\":\"claude-sonnet-5\",\"error\":\"No LLM provider configured. Set ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN (Tier-3), OPENROUTER_API_KEY (#2042), or OLLAMA_API_KEY (Tier-2 — #1725).\",\"durationMs\":9,\"remediation\":\"Set one of ANTHROPIC_API_KEY, OPENROUTER_API_KEY (+ optional OPENROUTER_BASE_URL), or OLLAMA_API_KEY. Or set RUFLO_PROVIDER=openrouter|ollama to force a specific provider.\"}\n{\"success\":true,\"agentId\":\"ch8-review\",\"terminated\":true,\"terminatedAt\":\"2026-11-08T13:15:32.493Z\"}\n"
+    },
+    "/tmp/ch8-meta.json": {
+      "bytes": 401,
+      "sha256": "a8f1ca8575149d65ced68ecdc2e5483e54d4ec3f3ae4bf503a160d7276f5d62e",
+      "truncated": false,
+      "text": "{\n  \"schema\": 1,\n  \"repo\": \"llm-connector-hub\",\n  \"harnessFit\": 82,\n  \"compileConfidence\": 100,\n  \"taskCoverage\": 79,\n  \"toolSafety\": 100,\n  \"memoryUsefulness\": 47,\n  \"estCostPerRunUsd\": 0.048,\n  \"recommendedMode\": \"CLI + MCP\",\n  \"archetype\": \"typescript-sdk-harness\",\n  \"template\": \"vertical:coding\",\n  \"scaffoldReady\": true,\n  \"hardConstraints\": \"6/6\",\n  \"generatedAt\": \"2026-11-08T13:15:32.559Z\"\n}\n"
+    },
+    "/tmp/ch8-darwin.log": {
+      "bytes": 763,
+      "sha256": "6ceb77b8c065965c2074db003dfe3042a0046600d3dc6166990b933590833b2f",
+      "truncated": false,
+      "text": "note: --sandbox real (the default) scores variants by this repo's own test\ncommand, which cannot distinguish between mutated harness surfaces — every\nvariant will score identically and evolution will not converge on anything\n(see README \"The evaluation substrate\", ADR-099/102). Pass --sandbox mock\n(fast, deterministic), --sandbox agent (executes the real surface code,\nstill offline), or --sandbox llm-agent (genuine real-LLM signal, real API\nspend, ADR-273) for genuine evolutionary signal.\n\nDarwin Mode — leaderboard\n  0.435  baseline  [planner]  safety=1.00  pass=0.00 ◀ winner\n  0.435  g1_v0  [retryPolicy]  safety=1.00  pass=0.00\n\nWinner: baseline\nLineage: baseline\nDelta over baseline: +0.000\n\nArtifacts: /tmp/connector-nov8am/security/.metaharness\n"
+    },
+    "/tmp/ch8-learning.log": {
+      "bytes": 963,
+      "sha256": "3d1a9bf5c97997bee226fdf1aba5eb4318780705f85c9641513a06cf522b6144",
+      "truncated": false,
+      "text": "Offline local MiniLM model verified: 384 dimensions; remote loading disabled\n[INFO] Recording outcome for task: connector-20261108-redirect\n[policy] anchor mirror not written: ENOSPC: no space left on device, mkdir '/home/ruv/.config/ruflo/policy-trust/991bd39db4bebadc55aef3158dd3e6b53058364b425bc41a6a15ba81671a5e79'\nTransformers.js loaded: Xenova/all-MiniLM-L6-v2\n{\n  \"taskId\": \"connector-20261108-redirect\",\n  \"success\": false,\n  \"duration\": 926,\n  \"learningUpdates\": {\n    \"patternsUpdated\": 2,\n    \"newPatterns\": null,\n    \"trajectoryId\": null,\n    \"controller\": \"intelligence+bridge-store\",\n    \"outcomePersisted\": true,\n    \"available\": true\n  },\n  \"trajectory\": {\n    \"recorded\": true\n  },\n  \"quality\": 0.8,\n  \"pheromone\": {\n    \"active\": false,\n    \"reason\": \"no running pheromone-adaptive swarm\"\n  },\n  \"feedback\": {\n    \"recorded\": true,\n    \"controller\": \"intelligence+bridge-store\",\n    \"updates\": 2\n  },\n  \"timestamp\": \"2026-11-08T13:18:30.223Z\"\n}\n"
+    },
+    "/tmp/ch8-offline.log": {
+      "bytes": 273,
+      "sha256": "417711d1e1595731897ef3e9191a55392bceb958adf14553e41aeb3ec042852b",
+      "truncated": false,
+      "text": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n  File \"/usr/lib/python3.12/socket.py\", line 233, in __init__\n    _socket.socket.__init__(self, family, type, proto, fileno)\nPermissionError: [Errno 1] Operation not permitted\nDENIED 2 1\nDENIED 10 1\n"
+    },
+    "security/.metaharness/lineage.json": {
+      "bytes": 443,
+      "sha256": "6c547f81102c105bcd72549ac287247c76764306bf2e3092bb100cae3ad2825f",
+      "truncated": false,
+      "text": "{\n  \"nodes\": [\n    {\n      \"id\": \"baseline\",\n      \"parentId\": null,\n      \"generation\": 0,\n      \"mutationSurface\": \"planner\",\n      \"finalScore\": 0.435,\n      \"promoted\": true\n    },\n    {\n      \"id\": \"g1_v0\",\n      \"parentId\": \"baseline\",\n      \"generation\": 1,\n      \"mutationSurface\": \"retryPolicy\",\n      \"finalScore\": 0.435,\n      \"promoted\": false\n    }\n  ],\n  \"edges\": [\n    {\n      \"from\": \"baseline\",\n      \"to\": \"g1_v0\"\n    }\n  ]\n}"
+    },
+    "/tmp/ch8-stop.log": {
+      "bytes": 30,
+      "sha256": "c68686795c1b11cc4b2ea80139b1588a4ed94180bdb8edb40024b358dfdd9bc2",
+      "truncated": false,
+      "text": "Worker daemon was not running\n"
+    }
+  },
+  "rustAudit": {
+    "database": {
+      "advisory-count": 1422,
+      "last-commit": "309392b18f6b17022f82c701f300433126901068",
+      "last-updated": "2026-11-06T16:34:32+01:00"
+    },
+    "vulnerabilities": [
+      {
+        "id": "RUSTSEC-2026-0007",
+        "package": "bytes",
+        "version": "1.11.0"
+      },
+      {
+        "id": "RUSTSEC-2026-0204",
+        "package": "crossbeam-epoch",
+        "version": "0.9.18"
+      },
+      {
+        "id": "RUSTSEC-2026-0009",
+        "package": "time",
+        "version": "0.3.44"
+      }
+    ],
+    "warningCounts": {
+      "unmaintained": 5,
+      "unsound": 3,
+      "yanked": 1
+    }
+  }
+}

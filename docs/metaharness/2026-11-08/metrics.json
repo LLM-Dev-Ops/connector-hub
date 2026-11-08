@@ -1,0 +1,62 @@
+{
+  "metrics": {
+    "base-focused": {
+      "passed": 52,
+      "failed": 0,
+      "pending": 0
+    },
+    "focused": {
+      "passed": 66,
+      "failed": 0,
+      "pending": 0
+    },
+    "base-all": {
+      "passed": 944,
+      "failed": 85,
+      "pending": 0
+    },
+    "all": {
+      "passed": 958,
+      "failed": 85,
+      "pending": 0
+    }
+  },
+  "lostPassing": [],
+  "audit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 16,
+      "high": 37,
+      "critical": 5,
+      "total": 58
+    },
+    "dependencies": {
+      "prod": 532,
+      "dev": 441,
+      "optional": 108,
+      "peer": 2,
+      "peerOptional": 0,
+      "total": 1006
+    }
+  },
+  "prodAudit": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 12,
+      "high": 26,
+      "critical": 2,
+      "total": 40
+    },
+    "dependencies": {
+      "prod": 532,
+      "dev": 441,
+      "optional": 108,
+      "peer": 2,
+      "peerOptional": 0,
+      "total": 1006
+    }
+  },
+  "inverseVerified": true
+}
